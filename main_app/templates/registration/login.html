@@ -1,12 +1,16 @@
+<style>
+
+</style>
+
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Login Page</h1>
+<h1>Login</h1>
 
 <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button id="submit-btn" class="btn waves-effect waves-light red" type="submit" name="Confirm" value="Login">Login
+    <button id="submit-btn" class="btn waves-effect waves-light blue" type="submit" name="Confirm" value="Login">Login
         <i class="material-icons left">login</i>
     </button>
     <input type="hidden" name="next" value="{{ next }}">
