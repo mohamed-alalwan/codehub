@@ -37,7 +37,7 @@ class QuestionUpdate(UpdateView):
 
 class QuestionDelete(DeleteView):
     model = Question
-    success_url = '/question/index'
+    success_url = '/question/'
 
 
 
