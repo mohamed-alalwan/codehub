@@ -1,0 +1,48 @@
+body{
+    min-height: 100vh !important;
+    font-family: 'Cinzel', serif;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+.logo-image{
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+}
+
+@media (max-width: 700px){
+    .logo-text{
+        font-size: 20px;
+    }
+}
+
+.page-footer{
+    padding: 0 !important;
+}
+
+#submit-btn{
+    margin: 20px 0;
+    width: 100%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardImage{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.card-a{
+    color: inherit;
+}
