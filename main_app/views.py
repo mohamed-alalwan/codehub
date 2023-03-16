@@ -12,7 +12,12 @@ def question_index(request):
     return render(request,'question/question_index.html', {'questions': questions})
 
 def question_detail(request, question_id):
-    cat = Question.objects.get(id=question_id)
+    question= Question.objects.get(id=question_id)
+    
+    return render(request, 'question/question_detail.html', {
+        'question': question,
+        
+        })
 
 
 
@@ -30,7 +35,7 @@ class QuestionUpdate(UpdateView):
 
 class QuestionDelete(DeleteView):
     model = Question
-    success_url = '/'
+    success_url = '/question/index'
 
 class QuestionDetail(DetailView):
     model = Question

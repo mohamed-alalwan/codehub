@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 {% block content %}
 <h1>Question List</h1>
-{% for question in questions %}
+
 <div class="card">
   <a href="/question/{{question.id}}" class="card-a">
     <div class="card-content ">
@@ -15,7 +15,9 @@
       </div>
     </div>
   </a>
-  
+  <div class="card-action">
+    <a href="{% url 'update_question' question.id %}">Edit</a>
+    <a href="{% url 'question_delete' question.id %}">Delete</a>
   </div>
-  {% endfor %}
+  </div>
    {% endblock %}
