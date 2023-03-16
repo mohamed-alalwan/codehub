@@ -16,8 +16,8 @@
     </div>
   </a>
   <div class="card-action">
-    <a href="{% url 'update_question' question.id %}">Edit</a>
-    <a href="{% url 'question_delete' question.id %}">Delete</a>
+    <a class="btn blue" href="{% url 'update_question' question.id %}">Edit</a>
+    <a class="btn blue" href="{% url 'question_delete' question.id %}">Delete</a>
   </div>
   </div>
    {% endblock %}

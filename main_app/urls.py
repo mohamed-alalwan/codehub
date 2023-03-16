@@ -4,8 +4,6 @@ urlpatterns = [
 
     # Catrgory Urls
     path('', views.home, name='home'),
-
-
     path('question/', views.question_index, name='question_index'),
     path('question/create/', views.CreateQuestion.as_view() , name='create_question'),
     path('question/<int:question_id>/', views.question_detail, name='question_detail'),
