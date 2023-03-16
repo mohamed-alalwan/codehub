@@ -7,6 +7,11 @@ from .models import Question
 def home(request):
     return render(request, 'home.html')
 
+
+
+# =======================Qustion Section========================
+
+
 def question_index(request):
     questions = Question.objects.all()
     return render(request,'question/question_index.html', {'questions': questions})
@@ -19,10 +24,6 @@ def question_detail(request, question_id):
         
         })
 
-
-
-
-# =======================Classes========================
 
 class CreateQuestion(CreateView):
     model= Question
@@ -37,5 +38,8 @@ class QuestionDelete(DeleteView):
     model = Question
     success_url = '/question/index'
 
-class QuestionDetail(DetailView):
-    model = Question
+
+
+
+# =======================Answer Section========================
+
