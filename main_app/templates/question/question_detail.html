@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1>Question List</h1>
+
+<div class="card">
+  <a href="/question/{{question.id}}" class="card-a">
+    <div class="card-content ">
+      <div class="flex-container">
+        <div>
+          <span class="card-title">Title: {{ question.title }}</span>
+          <p>Body: {{ question.body }}</p>
+          <p>Date: {{ question.date }}</p>
+         
+        </div>
+      </div>
+    </div>
+  </a>
+  <div class="card-action">
+    <a href="{% url 'update_question' question.id %}">Edit</a>
+    <a href="{% url 'question_delete' question.id %}">Delete</a>
+  </div>
+  </div>
+   {% endblock %}
