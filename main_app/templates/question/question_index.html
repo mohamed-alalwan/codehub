@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1>Question List</h1>
+<div class="btn"><a href="{% url 'create_question' %}">Add Question</a></div>
+{% for question in questions %}
+<div class="card">
+  <a href="/question/{{question.id}}" class="card-a">
+    <div class="card-content ">
+      <div class="flex-container">
+        <div>
+          <span class="card-title">Title: {{ question.title }}</span>
+          <p>Body: {{ question.body }}</p>
+          <p>Date: {{ question.date }}</p>
+         
+        </div>
+      </div>
+    </div>
+  </a>
+  </div>
+  {% endfor %}
+   {% endblock %}

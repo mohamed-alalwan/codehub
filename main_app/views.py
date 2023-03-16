@@ -1,3 +1,7 @@
+
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+from .models import Question
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -6,6 +10,42 @@ from django.contrib.auth import login
 def home(request):
     return render(request, 'home.html')
 
+# =======================Qustion Section========================
+
+
+def question_index(request):
+    questions = Question.objects.all()
+    return render(request,'question/question_index.html', {'questions': questions})
+
+def question_detail(request, question_id):
+    question= Question.objects.get(id=question_id)
+    
+    return render(request, 'question/question_detail.html', {
+        'question': question,
+        
+        })
+
+
+class CreateQuestion(CreateView):
+    model= Question
+    fields = '__all__'
+    
+
+class QuestionUpdate(UpdateView):
+    model = Question
+    fields = '__all__'
+
+class QuestionDelete(DeleteView):
+    model = Question
+    success_url = '/question/index'
+
+
+
+
+# =======================Answer Section========================
+
+
+# =======================Sign Up Section========================
 def signup(request):
     error_message = ''
     if request.method == 'POST':
