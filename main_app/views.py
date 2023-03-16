@@ -1,14 +1,20 @@
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Question
+from .models import Question, Category, Answer
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
-# Create your views here.
+
+# =======================Category Section========================
+
+
+
 def home(request):
-    return render(request, 'home.html')
+    categories = Category.objects.all()
+    return render(request,'home.html', {'categories': categories})
+
 
 # =======================Qustion Section========================
 
@@ -43,6 +49,24 @@ class QuestionDelete(DeleteView):
 
 
 # =======================Answer Section========================
+
+def answer_index(request):
+    answers = Answer.objects.all()
+    return render(request,'question/question_index.html', {'answers': answers})
+
+
+class CreateAnswer(CreateView):
+    model= Answer
+    fields = '__all__'
+    
+
+class AnswerUpdate(UpdateView):
+    model = Answer
+    fields = '__all__'
+
+class AnswerDelete(DeleteView):
+    model = Answer
+    
 
 
 # =======================Sign Up Section========================
