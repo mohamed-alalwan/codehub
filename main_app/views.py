@@ -15,6 +15,9 @@ def home(request):
     categories = Category.objects.all()
     return render(request,'home.html', {'categories': categories})
 
+def about(request):
+    return render(request,'about.html')
+
 
 # =======================Qustion Section========================
 
