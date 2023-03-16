@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Hub</title>
+    <title>CodeHub<\></title>
     <!-- Static CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- icons -->
@@ -20,11 +20,11 @@
     <script src="{% static 'scripts/app.js' %}" defer></script>
 </head>
 <body>
-    <nav class="nav-wraper red">
+    <nav class="nav-wraper blue">
         <div class="container">
             {% load static %}
             <a href="/" class="brand-logo">
-                <!--<img class="logo-image" src="{% static 'images/dragon.png' %}" alt="logo">--> <span class="logo-text">Code Hub</span>
+                <!--<img class="logo-image" src="{% static 'images/dragon.png' %}" alt="logo">--> <span class="logo-text">CodeHub<\></span>
             </a>
             <a href="#!" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
@@ -32,23 +32,30 @@
             <ul id="desktop-links" class="right hide-on-med-and-down">
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'question_index' %}">Question</a></li>
-                
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+
             </ul>
         </div>
     </nav>
 
     <ul id="mobile-links" class="sidenav">
     </ul>
+    <div class="main-container">
+        <div class="container">
+            {% block content %}
 
-    <div class="container">
-        {% block content %}
-
-        {% endblock content %}
+            {% endblock content %}
+        </div>
     </div>
 
-    <footer class="page-footer red">
-        <div class="footer-copyright red">
-            <div class="container center">Code Hub | © 2023 All Rights Reserved
+    <footer class="page-footer blue">
+        <div class="footer-copyright blue">
+            <div class="container center">CodeHub<\> | © 2023 All Rights Reserved
         </div> 
     </footer>
 </body>

@@ -10,5 +10,6 @@ urlpatterns = [
 
 
     # Answer Urls
-    
+  
+    path('signup/', views.signup, name='signup'),
 ]

@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body{
     min-height: 100vh !important;
-    font-family: 'Cinzel', serif;
+    font-family: 'Ubuntu Mono', monospace;
+    
 }
 
 footer{
@@ -46,3 +49,7 @@ footer{
 .card-a{
     color: inherit;
 }
+
+/* .main-container {
+    background-image: url('https://thumbs.dreamstime.com/b/binary-computer-code-seamless-pattern-matrix-background-digits-binary-computer-code-seamless-pattern-matrix-background-215163228.jpg');
+} */
