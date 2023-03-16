@@ -1,7 +1,14 @@
+<style>
+.rules {
+    font-size: xx-small;
+
+}
+</style>
+
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Sign Up Page</h1>
+<h1>Sign Up</h1>
 
 {% if error_message %}
 <p class="red-text">{{ error_message }}</p>
@@ -9,8 +16,8 @@
 
 <form action="{% url 'signup' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button id="submit-btn" class="btn waves-effect waves-light red" type="submit" name="Confirm" value="signup">Sign Up
+   <div class= 'rules'> {{ form.as_p }} </div>
+    <button id="submit-btn" class="btn waves-effect waves-light blue" type="submit" name="Confirm" value="signup">Sign Up
         <i class="material-icons left">login</i>
     </button>
 </form>

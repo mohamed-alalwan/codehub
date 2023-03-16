@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeHub<\></title>
+    <title>CodeHub</title>
     <!-- Static CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- icons -->
@@ -24,19 +24,19 @@
         <div class="container ctaAuth">
             {% load static %}
             <a href="/" class="brand-logo">
-                <!--<img class="logo-image" src="{% static 'images/dragon.png' %}" alt="logo">--> <span class="logo-text">CodeHub<\></span>
+                <img class="logo-image" src="{% static 'images/111.png' %}" alt="logo"> <span class="logo-text">CodeHub<\></span>
             </a>
             <a href="#!" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
             <ul id="desktop-links" class="right hide-on-med-and-down">
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'question_index' %}">Question</a></li>
+                <li><a  href="{% url 'home' %}">Home</a></li>
+                <li><a  href="{% url 'question_index' %}">Questions</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a class="btn" href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a class="signin" href="{% url 'login' %}">Login</a></li>
+                <li><a class="signup" href="{% url 'signup' %}">Sign Up</a></li>
                 {% endif %}
 
             </ul>
