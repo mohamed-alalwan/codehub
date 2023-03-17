@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="bkg">
+<h1>What is CodeHub&lt;/&gt; </h1>
+<hr>
+<p>
+    CodeHub is your one-stop destination to debugging your faulty code, and forming communities with other like-minded developers. Sign up, sign in, and you're ready to explore CodeHub&lt;/&gt;
+    <br>
+    <br>
+    <a class="btn blue" href="{% url 'signup' %}">Sign Up</a>
+    <br>
+    <br>
+    <a class="btn blue" href="{% url 'login' %}">Login</a>
+</p>
+</div>
+{% endblock %}

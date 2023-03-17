@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 {% block content %}
-<h1 >Question List</h1>
-<div class="btn"><a style="color:black;" href="{% url 'create_question' %}">Add Question</a></div>
+<h1>Question List</h1>
+<div><a class="btn blue" href="{% url 'create_question' %}">Add Question</a></div>
 {% for question in questions %}
 <div class="card">
   <a href="/question/{{question.id}}" class="card-a">
