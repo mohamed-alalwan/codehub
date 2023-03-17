@@ -3,7 +3,10 @@
 body{
     min-height: 100vh !important;
     font-family: 'Ubuntu Mono', monospace;
-    
+    background: url(https://d1m75rqqgidzqn.cloudfront.net/wp-data/2021/06/08121338/shutterstock_1714491562.jpg);
+    /* background-position: 100%; */
+    background-repeat:no-repeat;
+    background-size: cover;
 }
 
 footer{
@@ -50,3 +53,12 @@ footer{
     color: inherit;
 }
 
+/* .main-container {
+    background-image: url('https://thumbs.dreamstime.com/b/binary-computer-code-seamless-pattern-matrix-background-digits-binary-computer-code-seamless-pattern-matrix-background-215163228.jpg');
+} */
+
+.full-height{
+    background-color: white;
+    min-height: 100vh;
+    border: solid white;
+}
