@@ -24,13 +24,14 @@
         <div class="container ctaAuth">
             {% load static %}
             <a href="/" class="brand-logo">
-                <img class="logo-image" src="{% static 'images/111.png' %}" alt="logo"> <span class="logo-text">CodeHub<\></span>
+                <img class="logo-image" src="{% static 'images/111.png' %}" alt="logo"> <span class="logo-text">CodeHub&lt;/&gt;</span>
             </a>
             <a href="#!" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
             <ul id="desktop-links" class="right hide-on-med-and-down">
                 <li><a  href="{% url 'home' %}">Home</a></li>
+                <li><a  href="{% url 'about' %}">About</a></li>
                 <li><a  href="{% url 'question_index' %}">Questions</a></li>
                 {% if user.is_authenticated %}
                 <li><a class="btn" href="{% url 'logout' %}">Logout</a></li>
@@ -55,7 +56,7 @@
 
     <footer class="page-footer blue">
         <div class="footer-copyright blue">
-            <div class="container center">CodeHub<\> | © 2023 All Rights Reserved
+            <div class="container center">CodeHub&lt;/&gt; | © 2023 All Rights Reserved
         </div> 
     </footer>
 </body>
