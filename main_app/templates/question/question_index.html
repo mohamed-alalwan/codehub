@@ -9,10 +9,11 @@
       <div class="flex-container">
         <div>
           <span class="card-title">Title: {{ question.title }}</span>
-          <p>Body: {{ question.body }}</p>
+          <p>Body: {{ question.body|safe}}</p>
           <p>Date: {{ question.date }}</p>
-         
+          
         </div>
+        <div><a class="btn blue" href="{% url 'create_answer' %}">Add Answer</a></div>
       </div>
     </div>
   </a>

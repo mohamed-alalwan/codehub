@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1>Answer Detail</h1>
+
+<div class="card">
+  <a href="/answer/{{answer.id}}" class="card-a">
+    <div class="card-content ">
+      <div class="flex-container">
+        <div>
+          <span class="card-title">Title: {{ answer.title }}</span>
+          <p>Body: {{ answer.body|safe}}</p>
+          <p>Date: {{ answer.date }}</p>
+         
+        </div>
+        <div><a class="btn blue" href="{% url 'create_reply' %}">Add Reply</a></div>
+      </div>
+    </div>
+  </a>
+  <div class="card-action">
+    <a class="btn blue" href="{% url 'answer_update' answer.id %}">Edit</a>
+    <a class="btn blue" href="{% url 'answer_delete' answer.id %}">Delete</a>
+  </div>
+  </div>
+   {% endblock %}
