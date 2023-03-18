@@ -1,11 +1,13 @@
 from django.db import models
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
 class Question(models.Model):
     title = models.CharField(max_length=200)
-    body = models.TextField(max_length=1000)
+    body = RichTextField(blank=True, null=True)
+    # body = models.TextField(max_length=1000)
     date = models.DateField()
 
     def get_absolute_url(self):
@@ -14,14 +16,22 @@ class Question(models.Model):
 
 class Answer(models.Model):
     title = models.CharField(max_length=200)
-    body = models.TextField(max_length=1000)
+    body = RichTextField(blank=True, null=True)
+    # body = models.TextField(max_length=1000)
     date = models.DateField()
+
+    def get_absolute_url(self):
+        return reverse('answer_index')
 
 
 class Reply(models.Model):
     title = models.CharField(max_length=200)
-    body = models.TextField(max_length=1000)
+    body = RichTextField(blank=True, null=True)
+    # body = models.TextField(max_length=1000)
     date = models.DateField()
+
+    def get_absolute_url(self):
+        return reverse('reply_index')
 
 
 class Category(models.Model):

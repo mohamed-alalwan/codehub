@@ -10,6 +10,11 @@ body{
     flex-direction: column;
     min-height: 100vh !important;
     font-family: 'Ubuntu Mono', monospace;
+    background: url(https://d1m75rqqgidzqn.cloudfront.net/wp-data/2021/06/08121338/shutterstock_1714491562.jpg);
+    /* background-position: 100%; */
+    background-repeat:no-repeat;
+    background-size: cover;
+
 }
 
 main {
@@ -130,4 +135,11 @@ blockquote{
    width: 150px;
    height: 150px;
    margin-right: 20px;
+}
+
+/* Full height class */
+.full-height{
+    background-color: white;
+    min-height: 100vh;
+    border: solid white;
 }
