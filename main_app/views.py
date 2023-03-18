@@ -5,6 +5,8 @@ from .models import Question, Category, Answer, Reply
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib import messages
+from .forms import SignUpForm
 
 
 # =======================Category Section========================
@@ -110,21 +112,29 @@ class ReplyDelete(DeleteView):
     success_url = '/reply/'
 
 
-# =======================Sign Up Section========================
+# =======================Auth Section========================
 def signup(request):
-    error_message = ''
     if request.method == 'POST':
         # Make a 'user' form object with the data from the browser
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             # save user to DB
             user = form.save()
             # Log in the user automatically once they sign up
             login(request, user)
+            messages.success(request,f"Account was successfully created! Welcome {user.username}!")
             return redirect('home')
-        else:
-            error_message = 'Invalid: Please Try Again!'
+        
     # If there's a bad post or get request
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
+    formSecond = SignUpForm()
+    try:
+        formSecond.errors.update(form.errors)
+    except Exception as e:
+        print(e)
+    context = {'form': formSecond}
     return render(request, 'registration/signup.html', context)
+
+
+# =======================Profile Section========================
+def profile_index(request):
+    return render(request, 'profile/index.html')

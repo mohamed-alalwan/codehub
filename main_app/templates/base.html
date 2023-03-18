@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeHub</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'logo.ico' %}" type="image/x-icon">
     <!-- Static CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- icons -->
@@ -20,42 +22,58 @@
     <script src="{% static 'scripts/app.js' %}" defer></script>
 </head>
 <body>
-    <nav class="nav-wraper blue">
-        <div class="container ctaAuth">
-            {% load static %}
+    <nav class="nav-wraper grey darken-4">
+        <div class="container">
             <a href="/" class="brand-logo">
-                <img class="logo-image" src="{% static 'images/111.png' %}" alt="logo"> <span class="logo-text">CodeHub&lt;/&gt;</span>
+                <img class="logo-image" src="{% static 'images/logo1.png' %}" alt="logo"> <span>CodeHub</span>
             </a>
             <a href="#!" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
             <ul id="desktop-links" class="right hide-on-med-and-down">
-                <li><a  href="{% url 'home' %}">Home</a></li>
-                <li><a  href="{% url 'about' %}">About</a></li>
-                <li><a  href="{% url 'question_index' %}">Questions</a></li>
                 {% if user.is_authenticated %}
-                <li><a class="btn" href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                <li><a class="signin" href="{% url 'login' %}">Login</a></li>
-                <li><a class="signup" href="{% url 'signup' %}">Sign Up</a></li>
+                <li>
+                    <a class="dropdown-trigger" href="{% url 'profile_index' %}">
+                        <div class="profile-container">
+                            <img src="{% static 'images/profile/guest.png' %}" style="vertical-align: middle;">
+                            <span>{{ user.username }}</span>
+                        </div>
+                    </a>
+                </li>
+                {% endif %}
+                <li><a  href="{% url 'home' %}">Home</a></li>
+                <li><a  href="{% url 'question_index' %}">Questions</a></li>
+                <li><a  href="{% url 'about' %}">About</a></li>
+                {% if user.is_authenticated == false %}
+                <li>
+                    <a class="dropdown-trigger" href="#!">
+                        <div class="profile-container">
+                            <img src="{% static 'images/logo.png' %}" style="vertical-align: middle;">
+                            <span>{{ user.username }}</span>
+                        </div>
+                    </a>
+                </li>
+                <li><a id="signin" class="grey darken-4 btn" href="{% url 'login' %}">Login</a></li>
+                <li><a id="signup" class="grey lighten-5 black-text btn" href="{% url 'signup' %}">Sign Up</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
 
-    <ul id="mobile-links" class="sidenav">
+    <ul id="mobile-links" class="sidenav"> 
     </ul>
-    
+
+    <main>
         <div class="container full-height">
             {% block content %}
-
+    
             {% endblock content %}
         </div>
+    </main>
     
-
-    <footer class="page-footer blue">
-        <div class="footer-copyright blue">
-            <div class="container center">CodeHub&lt;/&gt; | © 2023 All Rights Reserved
+    <footer class="page-footer grey darken-4">
+        <div class="footer-copyright grey darken-4">
+            <div class="container center">CodeHub | © 2023 All Rights Reserved</div>
         </div> 
     </footer>
 </body>

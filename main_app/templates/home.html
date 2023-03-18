@@ -1,21 +1,51 @@
 {% extends 'base.html' %} 
 {% block content %}
-<h1>Categories</h1>
-
+<h1>Welcome to CodeHub</h1>
+<h5>Featuring Categories:</h5>
 {% for category in categories %}
-<div class="card">
-  <a href="" class="card-a">
-    <div class="card-content ">
-      <div class="flex-container">
-        <div>
-          <span class="card-title"> {{ category.name }}</span>
-          <p>{{ category.description }}</p>
-          
-         
-        </div>
+<ul class="collapsible">
+    <li class="active">
+      <div class="collapsible-header">
+          <i class="material-icons">code</i>
+          <!--Category Name-->
+          <span>{{ category.name }}</span><span class="badge" data-badge-caption="most recent">(1)</span>
       </div>
-    </div>
-  </a>
-  </div>
-  {% endfor %}
-   {% endblock %}
+      <div class="collapsible-body" >
+        <blockquote>
+          <!--Category Description-->
+          <span>{{ category.description }}</span>
+        </blockquote>
+       
+        <table class="striped">
+          <thead>
+            <!--Table Headers-->
+            <tr>
+                <th>Question</th>
+                <th>User</th>
+                <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!--TODO: 3 Recent Questions Loop Here-->
+            <tr>
+              <td><a href="#!">How to do this in JavaScript?</a></td>
+              <td>Ahmed Abdullah</td>
+              <td>16 March, 2023</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Indiviual Category Link -->
+        <a id="submit-btn" href="/category/{{category.id}}" class="blue-grey lighten-2 btn"><i class="material-icons left">view_list</i> View More</a>
+      </div>
+    </li>
+</ul>
+{% endfor %}
+
+{% for message in messages %}
+<script>
+  M.toast({html: '{{ message }}'})
+</script>
+{% endfor %}
+
+{% endblock %}
