@@ -1,12 +1,13 @@
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Question, Category, Answer, Reply
+from .models import Question, Category, Answer, Reply, Profile
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib import messages
 from .forms import SignUpForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # =======================Category Section========================
@@ -138,3 +139,9 @@ def signup(request):
 # =======================Profile Section========================
 def profile_index(request):
     return render(request, 'profile/index.html')
+
+class ProfileUpdate(SuccessMessageMixin, UpdateView):
+    model = Profile
+    fields = ['avatar', 'bio']
+    success_url = '/profile/'
+    success_message = 'Profile updated successfully!'
