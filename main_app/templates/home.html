@@ -40,6 +40,12 @@
       </div>
     </li>
 </ul>
-
 {% endfor %}
+
+{% for message in messages %}
+<script>
+  M.toast({html: '{{ message }}'})
+</script>
+{% endfor %}
+
 {% endblock %}

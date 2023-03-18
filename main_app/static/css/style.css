@@ -106,5 +106,28 @@ blockquote{
 }
 
 .profile-container img{
-    margin-right: 5px;
+    margin-right: 10px;
+}
+
+/* Sub nav */
+#sub-nav{
+    background-color: white;
+    box-shadow: none;
+    margin-top: 10px;
+}
+
+/* Profile Page */
+.profile-header{
+    height: auto;
+    margin: 10px 0;
+}
+
+.profile-header h2{
+    margin: 0;
+}
+
+.profile-header img{
+   width: 150px;
+   height: 150px;
+   margin-right: 20px;
 }

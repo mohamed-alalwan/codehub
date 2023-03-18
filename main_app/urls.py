@@ -15,6 +15,10 @@ urlpatterns = [
     # Answer Urls
     path('answer/index', views.answer_index, name="answer_index"),
    
-  
+    # Auth Urls
     path('signup/', views.signup, name='signup'),
+
+    # Profile Urls
+    path('profile/', views.profile_index, name='profile_index')
+
 ]

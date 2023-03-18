@@ -74,7 +74,7 @@ class AnswerDelete(DeleteView):
     
 
 
-# =======================Sign Up Section========================
+# =======================Auth Section========================
 def signup(request):
     if request.method == 'POST':
         # Make a 'user' form object with the data from the browser
@@ -95,3 +95,8 @@ def signup(request):
         print(e)
     context = {'form': formSecond}
     return render(request, 'registration/signup.html', context)
+
+
+# =======================Profile Section========================
+def profile_index(request):
+    return render(request, 'profile/index.html')
