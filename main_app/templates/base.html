@@ -35,7 +35,7 @@
                 <li>
                     <a class="dropdown-trigger" href="{% url 'profile_index' %}">
                         <div class="profile-container">
-                            <img src="{% static 'images/profile/guest.png' %}" style="vertical-align: middle;">
+                            <img src="{% if user.profile.avatar %}{% static user.profile.avatar|cut:'main_app/static/' %}{% else %}{% static 'images/profile/guest.png' %}{% endif %}" style="vertical-align: middle;">
                             <span>{{ user.username }}</span>
                         </div>
                     </a>

@@ -13,7 +13,7 @@ body{
     background: url('/static/images/background/image.jpg');
     background-repeat:no-repeat;
     background-size: cover;
-
+    background-position: center;
 }
 
 main {
@@ -146,4 +146,14 @@ blockquote{
     min-height: 100%;
     border: solid white;
     padding: 0 20px;
+}
+
+/* preview profile image */
+#preview-image{
+    width : 200px;
+    height : 200px;
+    object-fit: cover ;
+    display : block;
+    margin : auto;
+    border-radius: 50%;
 }

@@ -1,28 +1,35 @@
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Question, Category, Answer, Reply
+from .models import Question, Category, Answer, Reply, Profile
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # =======================Category Section========================
 
-
-
 def home(request):
     categories = Category.objects.all()
-    return render(request,'home.html', {'categories': categories})
+    questions = None
+    for category in categories:
+        if(questions is None):
+            questions = Question.objects.filter(category=category).order_by('-date')[:3]
+        else:
+            questions |= Question.objects.filter(category=category).order_by('-date')[:3]
+
+    return render(request,'home.html', {'categories': categories, 'questions': questions})
 
 def about(request):
     return render(request,'about.html')
 
 
 # =======================Qustion Section========================
-
 
 def question_index(request):
     questions = Question.objects.all()
@@ -39,7 +46,10 @@ def question_detail(request, question_id):
 
 class CreateQuestion(CreateView):
     model= Question
-    fields = '__all__'
+    fields = ['title', 'body', 'category']
+    def form_valid(self, form) :
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
 
 class QuestionUpdate(UpdateView):
@@ -49,8 +59,6 @@ class QuestionUpdate(UpdateView):
 class QuestionDelete(DeleteView):
     model = Question
     success_url = '/question/'
-
-
 
 
 # =======================Answer Section========================
@@ -80,7 +88,6 @@ class AnswerUpdate(UpdateView):
 class AnswerDelete(DeleteView):
     model = Answer
     success_url = '/answer/'
-
 
 
 # =======================Reply Section========================
@@ -113,6 +120,7 @@ class ReplyDelete(DeleteView):
 
 
 # =======================Auth Section========================
+
 def signup(request):
     if request.method == 'POST':
         # Make a 'user' form object with the data from the browser
@@ -136,5 +144,25 @@ def signup(request):
 
 
 # =======================Profile Section========================
+@login_required
 def profile_index(request):
     return render(request, 'profile/index.html')
+
+@login_required
+def profile_update(request):
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect('profile_index')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
+    return render(request, 'profile/update.html', {'user_form': user_form, 'profile_form': profile_form})
+
+# =======================Category Section========================

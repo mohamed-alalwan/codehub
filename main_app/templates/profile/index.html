@@ -2,15 +2,29 @@
 {% block content %}
 <nav id="sub-nav">
     <ul class="blue-text">
-        <li ><a class="grey darken-4 btn" href=""><i class="material-icons left">edit_note</i> Edit Profile</a></li>
+        <li ><a class="grey darken-4 btn" href="{% url 'profile_update' %}"><i class="material-icons left">edit_note</i> Edit Profile</a></li>
         <li ><a class="grey darken-4 btn" href=""><i class="material-icons left">key</i> Change Password</a></li>
         <li class="right"><a class="grey darken-4 btn" href="{% url 'logout' %}"><i class="material-icons left">logout</i>Logout</a></li>
     </ul>
 </nav>
 {% load static %}
 <div class="profile-container profile-header">
-    <img src="{% static 'images/profile/guest.png' %}">
+    <img src="{% if user.profile.avatar %}{% static user.profile.avatar|cut:'main_app/static/' %}{% else %}{% static 'images/profile/guest.png' %}{% endif %}">
     <h2>{{ user.first_name }}'s Profile</h2>
 </div>
 <hr>
+<h4>Biography</h4>
+<div class="bio">
+    {% if user.profile.bio %}
+    {{ user.profile.bio }}
+    {% else %}
+    no bio yet...
+    {% endif %}
+</div>
+
+{% for message in messages %}
+<script>
+  M.toast({html: '{{ message }}'})
+</script>
+{% endfor %}
 {% endblock %}

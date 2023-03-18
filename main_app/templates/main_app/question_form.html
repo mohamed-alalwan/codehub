@@ -1,24 +1,32 @@
 {%extends 'base.html'%}
 
 {%block content%}
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-            {{form.media}}
-            {{form.as_table}}
-        </table>
-        <input type="submit" value="Submit!" class="btn blue">
-    </form>
+{% if object %}
+<h1>Edit Question</h1>
+{% else %}
+<h1>Add Question</h1>
+{% endif %}
+<h1></h1>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{form.media}}
+        {{form.as_table}}
+    </table>
+    <input type="submit" value="Submit!" class="btn blue">
+</form>
 
 
-    <script>
-        const dateElement = document.getElementById('id_date');
-        M.Datepicker.init(dateElement, {
-          format: 'yyyy-mm-dd',
-          defaultDate: new Date(),
-          setDefaultDate: true,
-          autoClose: true
-        });
-        </script>
+<script>
+    const dateElement = document.getElementById('id_date');
+    M.Datepicker.init(dateElement, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+    const categoryElement = document.getElementById('id_category');
+    M.FormSelect.init(categoryElement)
+</script>
 
 {% endblock %}
