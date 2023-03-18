@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeHub</title>
     <!-- favicon -->
-    <link rel="shortcut icon" href="{% static 'logo.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'favicon/logo.ico' %}" type="image/x-icon">
     <!-- Static CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- icons -->
@@ -22,10 +22,10 @@
     <script src="{% static 'scripts/app.js' %}" defer></script>
 </head>
 <body>
-    <nav class="nav-wraper grey darken-4">
+    <nav id="navbar" class="nav-wraper grey darken-4">
         <div class="container">
             <a href="/" class="brand-logo">
-                <img class="logo-image" src="{% static 'images/logo1.png' %}" alt="logo"> <span>CodeHub</span>
+                <img class="logo-image" src="{% static 'images/icons/logo1.png' %}" alt="logo"> <span>CodeHub</span>
             </a>
             <a href="#!" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
