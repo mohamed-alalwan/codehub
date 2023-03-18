@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% block content %}
-<h1>Question List</h1>
+<h1>Question Details</h1>
 
 <div class="card">
   <a href="/question/{{question.id}}" class="card-a">
@@ -14,9 +14,12 @@
       </div>
     </div>
   </a>
+  {% if user.is_authenticated %}
+  {% comment %} {% if  %}{% endif %} {% endcomment %}
   <div class="card-action">
     <a class="btn blue" href="{% url 'update_question' question.id %}">Edit</a>
     <a class="btn blue" href="{% url 'question_delete' question.id %}">Delete</a>
   </div>
+  {% endif %}
   </div>
    {% endblock %}

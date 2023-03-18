@@ -14,18 +14,22 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 # =======================Category Section========================
 
-
-
 def home(request):
     categories = Category.objects.all()
-    return render(request,'home.html', {'categories': categories})
+    questions = None
+    for category in categories:
+        if(questions is None):
+            questions = Question.objects.filter(category=category).order_by('-date')[:3]
+        else:
+            questions |= Question.objects.filter(category=category).order_by('-date')[:3]
+
+    return render(request,'home.html', {'categories': categories, 'questions': questions})
 
 def about(request):
     return render(request,'about.html')
 
 
 # =======================Qustion Section========================
-
 
 def question_index(request):
     questions = Question.objects.all()
@@ -42,7 +46,10 @@ def question_detail(request, question_id):
 
 class CreateQuestion(CreateView):
     model= Question
-    fields = '__all__'
+    fields = ['title', 'body', 'category']
+    def form_valid(self, form) :
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
 
 class QuestionUpdate(UpdateView):
@@ -52,8 +59,6 @@ class QuestionUpdate(UpdateView):
 class QuestionDelete(DeleteView):
     model = Question
     success_url = '/question/'
-
-
 
 
 # =======================Answer Section========================
@@ -83,7 +88,6 @@ class AnswerUpdate(UpdateView):
 class AnswerDelete(DeleteView):
     model = Answer
     success_url = '/answer/'
-
 
 
 # =======================Reply Section========================
@@ -116,6 +120,7 @@ class ReplyDelete(DeleteView):
 
 
 # =======================Auth Section========================
+
 def signup(request):
     if request.method == 'POST':
         # Make a 'user' form object with the data from the browser
@@ -159,3 +164,5 @@ def profile_update(request):
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
     return render(request, 'profile/update.html', {'user_form': user_form, 'profile_form': profile_form})
+
+# =======================Category Section========================

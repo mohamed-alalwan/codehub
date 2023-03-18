@@ -8,7 +8,7 @@
       <div class="collapsible-header">
           <i class="material-icons">code</i>
           <!--Category Name-->
-          <span>{{ category.name }}</span><span class="badge" data-badge-caption="most recent">(1)</span>
+          <span>{{ category.name }}</span>
       </div>
       <div class="collapsible-body" >
         <blockquote>
@@ -28,11 +28,15 @@
 
           <tbody>
             <!--TODO: 3 Recent Questions Loop Here-->
+            {% for question in  questions %}
+            {% if question.category.id is category.id %}
             <tr>
-              <td><a href="#!">How to do this in JavaScript?</a></td>
-              <td>Ahmed Abdullah</td>
-              <td>16 March, 2023</td>
+              <td style="width: 50%;"><a href="{% url 'question_detail' question.id %}">{{ question.title }}</a></td>
+              <td>{{ question.user }}</td>
+              <td>{{ question.date }}</td>
             </tr>
+            {% endif %}
+            {% endfor %}
           </tbody>
         </table>
         <!-- Indiviual Category Link -->
