@@ -44,15 +44,7 @@
                 <li><a  href="{% url 'home' %}">Home</a></li>
                 <li><a  href="{% url 'question_index' %}">Questions</a></li>
                 <li><a  href="{% url 'about' %}">About</a></li>
-                {% if user.is_authenticated == false %}
-                <li>
-                    <a class="dropdown-trigger" href="#!">
-                        <div class="profile-container">
-                            <img src="{% static 'images/logo.png' %}" style="vertical-align: middle;">
-                            <span>{{ user.username }}</span>
-                        </div>
-                    </a>
-                </li>
+                {% if user.is_authenticated == False %}
                 <li><a id="signin" class="grey darken-4 btn" href="{% url 'login' %}">Login</a></li>
                 <li><a id="signup" class="grey lighten-5 black-text btn" href="{% url 'signup' %}">Sign Up</a></li>
                 {% endif %}
