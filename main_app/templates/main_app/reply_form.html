@@ -1,6 +1,8 @@
 {%extends 'base.html'%}
 
+
 {%block content%}
+<h1>Add Reply</h1>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
@@ -20,5 +22,4 @@
           autoClose: true
         });
         </script>
-
 {% endblock %}

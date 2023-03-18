@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1>Answer List</h1>
+
+{% for answer in answers %}
+<div class="card">
+  <a href="/answer/{{answer.id}}" class="card-a">
+    <div class="card-content ">
+      <div class="flex-container">
+        <div>
+          <span class="card-title">Title: {{ answer.title }}</span>
+          <p>Body: {{ answer.body|safe }}</p>
+          <p>Date: {{ answer.date }}</p>
+        </div>
+      </div>
+    </div>
+
+  </a>
+
+  </div>
+  {% endfor %}
+   {% endblock %}
