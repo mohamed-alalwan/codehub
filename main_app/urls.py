@@ -34,5 +34,5 @@ urlpatterns = [
     path('profile/update', views.profile_update, name='profile_update'),
 
     # Category Urls
-    
+    path('category/<int:category_id>', views.category_detail, name='category_detail'),
 ]
