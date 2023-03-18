@@ -31,5 +31,8 @@ urlpatterns = [
     
     # Profile Urls
     path('profile/', views.profile_index, name='profile_index'),
-    path('profile/<int:pk>/update', views.ProfileUpdate.as_view(), name='profile_update'),
+    path('profile/update', views.profile_update, name='profile_update'),
+
+    # Category Urls
+    
 ]

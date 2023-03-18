@@ -5,8 +5,10 @@ from .models import Question, Category, Answer, Reply, Profile
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -137,11 +139,23 @@ def signup(request):
 
 
 # =======================Profile Section========================
+@login_required
 def profile_index(request):
     return render(request, 'profile/index.html')
 
-class ProfileUpdate(SuccessMessageMixin, UpdateView):
-    model = Profile
-    fields = ['avatar', 'bio']
-    success_url = '/profile/'
-    success_message = 'Profile updated successfully!'
+@login_required
+def profile_update(request):
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect('profile_index')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
+    return render(request, 'profile/update.html', {'user_form': user_form, 'profile_form': profile_form})

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Update Profile</h1>
+
+<form action="{% url 'profile_update' %}" method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+
+    <button id="submit-btn" class="grey darken-4 waves-effect waves-light btn" type="submit" name="Confirm" value="signup">Save Changes
+        <i class="material-icons left">save</i>
+    </button>
+</form>
+
+<script>
+    const avatarInput = document.getElementById('id_avatar');
+    const avatarInputParent = avatarInput.parentElement;
+    function createPreviewImage(src){
+        const previewImage = document.createElement('img');
+        previewImage.src = src;
+        previewImage.id = 'preview-image';
+        return previewImage;
+    }
+    avatarInputParent.childNodes.forEach(function(node) {
+        if(node.tagName == 'A'){
+            node.href = node.href.replace('/main_app', '');
+            node.textContent = node.href;
+            avatarInputParent.appendChild(createPreviewImage(node.href));
+        }
+    })
+    avatarInput.addEventListener('change', function(){
+        const file = this.files[0]
+        if(file){
+            const reader = new FileReader();
+            reader.addEventListener('load', function(){
+                let previewImage = document.getElementById('preview-image');
+                if(previewImage){
+                    previewImage.src = this.result;
+                }else{
+                    avatarInputParent.appendChild(createPreviewImage(this.result));
+                }
+            });
+            reader.readAsDataURL(file);
+        }else{
+            const previewImage = document.getElementById('preview-image')
+            if(previewImage){
+                previewImage.remove();
+            }
+        }
+        
+    });
+</script>
+{% endblock %}
