@@ -166,3 +166,8 @@ def profile_update(request):
     return render(request, 'profile/update.html', {'user_form': user_form, 'profile_form': profile_form})
 
 # =======================Category Section========================
+
+def category_detail(request, category_id):
+    category = Category.objects.get(id=category_id)
+    questions = Question.objects.filter(category=category).order_by('-date')
+    return render(request, 'category/detail.html', {'category': category, 'questions': questions})
