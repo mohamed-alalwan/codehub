@@ -12,6 +12,7 @@ from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm
 from django.contrib.messages.views import SuccessMessageMixin
 
 
+
 # =======================Category Section========================
 
 def home(request):
@@ -30,11 +31,12 @@ def about(request):
 
 
 # =======================Qustion Section========================
-
+@login_required
 def question_index(request):
     questions = Question.objects.all()
     return render(request,'question/question_index.html', {'questions': questions})
 
+@login_required
 def question_detail(request, question_id):
     question= Question.objects.get(id=question_id)
     
@@ -44,7 +46,7 @@ def question_detail(request, question_id):
         })
 
 
-class CreateQuestion(CreateView):
+class CreateQuestion(LoginRequiredMixin,CreateView):
     model= Question
     fields = ['title', 'body', 'category']
     def form_valid(self, form) :
@@ -52,21 +54,22 @@ class CreateQuestion(CreateView):
         return super().form_valid(form)
     
 
-class QuestionUpdate(UpdateView):
+class QuestionUpdate(LoginRequiredMixin, UpdateView):
     model = Question
     fields = '__all__'
 
-class QuestionDelete(DeleteView):
+class QuestionDelete(LoginRequiredMixin , DeleteView):
     model = Question
     success_url = '/question/'
 
 
 # =======================Answer Section========================
-
+@login_required
 def answer_index(request):
     answers = Answer.objects.all()
     return render(request,'answer/answer_index.html', {'answers': answers})
 
+@login_required
 def answer_detail(request, answer_id):
     answer= Answer.objects.get(id=answer_id)
     
@@ -76,26 +79,28 @@ def answer_detail(request, answer_id):
         })
 
 
-class CreateAnswer(CreateView):
+class CreateAnswer(LoginRequiredMixin,CreateView):
     model= Answer
     fields = '__all__'
     
 
-class AnswerUpdate(UpdateView):
+class AnswerUpdate(LoginRequiredMixin,UpdateView):
     model = Answer
     fields = '__all__'
 
-class AnswerDelete(DeleteView):
+class AnswerDelete(LoginRequiredMixin,DeleteView):
     model = Answer
     success_url = '/answer/'
 
 
 # =======================Reply Section========================
 
+@login_required
 def reply_index(request):
     replies = Reply.objects.all()
     return render(request,'reply/reply_index.html', {'replies': replies})
 
+@login_required
 def reply_detail(request, reply_id):
     reply = Reply.objects.get(id=reply_id)
     
@@ -105,21 +110,22 @@ def reply_detail(request, reply_id):
         })
 
 
-class CreateReply(CreateView):
+class CreateReply(LoginRequiredMixin,CreateView):
     model= Reply
     fields = '__all__'
     
 
-class ReplyUpdate(UpdateView):
+class ReplyUpdate(LoginRequiredMixin,UpdateView):
     model = Reply
     fields = '__all__'
 
-class ReplyDelete(DeleteView):
+class ReplyDelete(LoginRequiredMixin,DeleteView):
     model = Reply
     success_url = '/reply/'
 
 
 # =======================Auth Section========================
+
 
 def signup(request):
     if request.method == 'POST':
@@ -161,6 +167,8 @@ def change_password(request):
     context = {'form': formSecond}
     return render(request, 'registration/change_password.html', context)
 
+
+
 # =======================Profile Section========================
 @login_required
 def profile_index(request):
@@ -186,28 +194,28 @@ def profile_update(request):
     return render(request, 'profile/update.html', {'user_form': user_form, 'profile_form': profile_form})
 
 # =======================Category Section========================
-
+@login_required
 def category_detail(request, category_id):
     category = Category.objects.get(id=category_id)
     questions = Question.objects.filter(category=category).order_by('-date')
     return render(request, 'category/detail.html', {'category': category, 'questions': questions})
 
-class BadgeList(ListView):
+class BadgeList(LoginRequiredMixin,ListView):
     model = Badges
 
-class BadgeDetail(DetailView):
+class BadgeDetail(LoginRequiredMixin,DetailView):
     model = Badges
 
-class BadgeCreate(CreateView):
-    model = Badges
-    fields = '__all__'
-
-class BadgeUpdate(UpdateView):
+class BadgeCreate(LoginRequiredMixin,CreateView):
     model = Badges
     fields = '__all__'
 
+class BadgeUpdate(LoginRequiredMixin,UpdateView):
+    model = Badges
+    fields = '__all__'
 
-class BadgeDelete(DeleteView):
+
+class BadgeDelete(LoginRequiredMixin,DeleteView):
     model = Badges
     success_url = '/profile/'
 
