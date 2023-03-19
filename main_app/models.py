@@ -29,7 +29,7 @@ class Answer(models.Model):
     title = models.CharField(max_length=200)
     body = RichTextField()
     date = models.DateField(auto_now_add=True, blank=True)
-    likes = models.ManyToManyField(User, related_name='codehub.answers')
+    likes = models.ManyToManyField(User)
 
     def get_absolute_url(self):
         return reverse('answer_index')

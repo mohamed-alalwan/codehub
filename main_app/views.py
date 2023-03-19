@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from .models import Question, Category, Answer, Reply, Profile, Badges
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -148,6 +148,24 @@ def signup(request):
     context = {'form': formSecond}
     return render(request, 'registration/signup.html', context)
 
+def change_password(request):
+    if request.method == 'POST':
+        # Make a 'user' form object with the data from the browser
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            login(request, request.user)
+            messages.success(request,"Your password has been changed successfully!")
+            return redirect('home')
+        
+    # If there's a bad post or get request
+    formSecond = PasswordChangeForm(request.user)
+    try:
+        formSecond.errors.update(form.errors)
+    except Exception as e:
+        print(e)
+    context = {'form': formSecond}
+    return render(request, 'registration/change_password.html', context)
 
 
 

@@ -19,6 +19,10 @@
   <div class="card-action">
     <a class="btn blue" href="{% url 'answer_update' answer.id %}">Edit</a>
     <a class="btn blue" href="{% url 'answer_delete' answer.id %}">Delete</a>
+    <form action="{% url 'like_answer' answer.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn blue">Like</button>
+    </form>
   </div>
   </div>
    {% endblock %}
