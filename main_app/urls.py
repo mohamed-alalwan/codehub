@@ -1,4 +1,6 @@
 from django.urls import path
+
+
 from . import views
 urlpatterns = [
     # Catrgory Urls
@@ -28,6 +30,7 @@ urlpatterns = [
 
     # Auth Urls
     path('signup/', views.signup, name='signup'),
+   
     
     # Profile Urls
     path('profile/', views.profile_index, name='profile_index'),
