@@ -135,8 +135,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media/'
 
 CKEDITOR_CONFIGS = {
     'default': {
