@@ -28,6 +28,7 @@ urlpatterns = [
 
     # Auth Urls
     path('signup/', views.signup, name='signup'),
+    path('change_password/', views.change_password, name='change_password'),
     
     # Profile Urls
     path('profile/', views.profile_index, name='profile_index'),
