@@ -196,9 +196,9 @@ class BadgeDelete(DeleteView):
 @login_required
 def assoc_badges(request, profile_id, badge_id):
     Profile.objects.get(id=profile_id).badges.add(badge_id)
-    return redirect('detail', profile_id=profile_id)
+    return redirect('/profile/')
 
 @login_required
 def unassoc_badges(request, profile_id, badge_id):
     Profile.objects.get(id=profile_id).badges.remove(badge_id)
-    return redirect('detail', profile_id=profile_id)
+    return redirect('/profile/')

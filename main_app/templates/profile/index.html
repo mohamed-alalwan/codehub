@@ -30,9 +30,9 @@
 <hr>
 <div class="row">
     <div class="col s6">
-      <h3>{{ profile.name }}'s badges</h3>
-      {% if profile.badges.count %}
-        {% for badges in profile.badges.all %}
+      <h3>Badges</h3>
+      {% if user.profile.badges.count %}
+        {% for badges in user.profile.badges.all %}
           <div class="card">
             <div class="card-content">
               <span class="card-title">
@@ -41,7 +41,7 @@
               </span>
             </div>
             <div class="card-action">
-              <form action="{% url 'unassoc_badges' profile.id badges.id%}" method="post">
+              <form action="{% url 'unassoc_badges' user.profile.id badges.id%}" method="post">
                 {% csrf_token %}
                 <button id="submit-btn" class="btn waves-effect waves-light red" type="submit" name="Confirm">Remove
                   <i class="material-icons left">cancel</i>
@@ -51,9 +51,10 @@
           </div>
         {% endfor %}
       {% else %}
-          <p>No badges for {{ profile.name }} yet...</p>
+          <p>No badges for {{ user.first_name }} yet...</p>
       {% endif %}
     </div>
+
     <div class="col s6">
       <h3>Available badges</h3>
       {% if badges.count  %}
@@ -66,7 +67,7 @@
             </span>
           </div>
           <div class="card-action">
-            <form action="" method="post">
+            <form action="{% url 'assoc_badges' user.profile.id badges.id %}" method="post">
               {% csrf_token %}
               <button id="submit-btn" class="btn waves-effect waves-light red" type="submit" name="Confirm">Add
                 <i class="material-icons left">add_circle</i>
@@ -77,12 +78,9 @@
         
         {% endfor %}
       {% else %}
-      <p>{{ profile.name }} all ready has all the badges available...</p>
+      <p>{{ user.first_name }} all ready has all the badges avaiable...</p>
       {% endif %}
     </div>
   </div>
-{% for badge in badges  %}
-{{ badge }}
-{% endfor %}
 
 {% endblock %}

@@ -43,6 +43,7 @@ urlpatterns = [
     path('badges/create', views.BadgeCreate.as_view(), name='badges_create'),
     path('badges/<int:pk>/update/', views.BadgeUpdate.as_view(), name='badges_update'),
     path('badges/<int:pk>/delete/', views.BadgeDelete.as_view(), name='badges_delete'),
+
     #associate a profile with a badge
     path('profile/<int:profile_id>/assoc_badges/<int:badge_id>/', views.assoc_badges, name='assoc_badges'),
 
