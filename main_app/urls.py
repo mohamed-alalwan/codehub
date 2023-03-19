@@ -36,7 +36,6 @@ urlpatterns = [
     path('profile/', views.profile_index, name='profile_index'),
     path('profile/update', views.profile_update, name='profile_update'),
     
-
     # Category Urls
     path('category/<int:category_id>', views.category_detail, name='category_detail'),
 
@@ -47,9 +46,15 @@ urlpatterns = [
     path('badges/<int:pk>/update/', views.BadgeUpdate.as_view(), name='badges_update'),
     path('badges/<int:pk>/delete/', views.BadgeDelete.as_view(), name='badges_delete'),
 
-    #associate a profile with a badge
-    path('profile/<int:profile_id>/assoc_badges/<int:badge_id>/', views.assoc_badges, name='assoc_badges'),
+    # add badge to profile
+    path('profile/<int:profile_id>/add_badge/<int:badge_id>/', views.add_badge, name='add_badge'),
 
-    #unassociate a profile from badge
-    path('profile/<int:profile_id>/unassoc_badges/<int:badge_id>/', views.unassoc_badges, name='unassoc_badges'),
+    # remove badge from profile
+    path('profile/<int:profile_id>/remove_badge/<int:badge_id>/', views.remove_badge, name='remove_badge'),
+
+    # like answer
+    path('like/<int:pk>/answer', views.like_answer, name='like_answer'),
+
+    # dislike answer
+    path('dislike/<int:pk>/answer', views.dislike_answer, name='dislike_answer'),
 ]
