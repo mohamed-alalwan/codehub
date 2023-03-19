@@ -10,6 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
 
 
 
@@ -23,7 +25,6 @@ def home(request):
             questions = Question.objects.filter(category=category).order_by('-date')[:3]
         else:
             questions |= Question.objects.filter(category=category).order_by('-date')[:3]
-
     return render(request,'home.html', {'categories': categories, 'questions': questions})
 
 def about(request):
@@ -31,20 +32,14 @@ def about(request):
 
 
 # =======================Qustion Section========================
-@login_required
+
 def question_index(request):
     questions = Question.objects.all()
     return render(request,'question/question_index.html', {'questions': questions})
 
-@login_required
 def question_detail(request, question_id):
     question= Question.objects.get(id=question_id)
-    
-    return render(request, 'question/question_detail.html', {
-        'question': question,
-        
-        })
-
+    return render(request, 'question/question_detail.html', {'question': question})
 
 class CreateQuestion(LoginRequiredMixin,CreateView):
     model= Question
@@ -53,7 +48,6 @@ class CreateQuestion(LoginRequiredMixin,CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
-
 class QuestionUpdate(LoginRequiredMixin, UpdateView):
     model = Question
     fields = '__all__'
@@ -64,6 +58,7 @@ class QuestionDelete(LoginRequiredMixin , DeleteView):
 
 
 # =======================Answer Section========================
+
 @login_required
 def answer_index(request):
     answers = Answer.objects.all()
@@ -72,17 +67,15 @@ def answer_index(request):
 @login_required
 def answer_detail(request, answer_id):
     answer= Answer.objects.get(id=answer_id)
-    
-    return render(request, 'answer/answer_detail.html', {
-        'answer': answer,
-        
-        })
-
+    return render(request, 'answer/answer_detail.html', {'answer': answer })
 
 class CreateAnswer(LoginRequiredMixin,CreateView):
     model= Answer
-    fields = '__all__'
-    
+    fields = ['title', 'body']
+    def form_valid(self, form) :
+        form.instance.user = self.request.user
+        form.instance.question = Question.objects.get(id=9)
+        return super().form_valid(form)
 
 class AnswerUpdate(LoginRequiredMixin,UpdateView):
     model = Answer
@@ -91,7 +84,6 @@ class AnswerUpdate(LoginRequiredMixin,UpdateView):
 class AnswerDelete(LoginRequiredMixin,DeleteView):
     model = Answer
     success_url = '/answer/'
-
 
 # =======================Reply Section========================
 
@@ -103,12 +95,7 @@ def reply_index(request):
 @login_required
 def reply_detail(request, reply_id):
     reply = Reply.objects.get(id=reply_id)
-    
-    return render(request, 'reply/reply_detail.html', {
-        'reply': reply,
-        
-        })
-
+    return render(request, 'reply/reply_detail.html', {'reply': reply })
 
 class CreateReply(LoginRequiredMixin,CreateView):
     model= Reply
@@ -125,7 +112,6 @@ class ReplyDelete(LoginRequiredMixin,DeleteView):
 
 
 # =======================Auth Section========================
-
 
 def signup(request):
     if request.method == 'POST':
@@ -194,11 +180,14 @@ def profile_update(request):
     return render(request, 'profile/update.html', {'user_form': user_form, 'profile_form': profile_form})
 
 # =======================Category Section========================
+
 @login_required
 def category_detail(request, category_id):
     category = Category.objects.get(id=category_id)
     questions = Question.objects.filter(category=category).order_by('-date')
     return render(request, 'category/detail.html', {'category': category, 'questions': questions})
+
+# =======================Badge Section========================
 
 class BadgeList(ListView):
     model = Badge
@@ -214,7 +203,6 @@ class BadgeUpdate(UpdateView):
     model = Badge
     fields = '__all__'
 
-
 class BadgeDelete(DeleteView):
     model = Badge
     success_url = '/profile/'
@@ -228,3 +216,33 @@ def add_badge(request, profile_id, badge_id):
 def remove_badge(request, profile_id, badge_id):
     Profile.objects.get(id=profile_id).badges.remove(badge_id)
     return redirect('/profile/')
+
+# =======================Like/Dislike Section========================
+
+def like_answer(request, pk):
+    answer = Answer.objects.get(pk=pk)
+    #toggle like
+    if(answer.likes.contains(request.user)):
+        answer.likes.remove(request.user)
+    else:
+        answer.likes.add(request.user)
+    #remove dislike from answer if it exists
+    if(answer.dislikes.contains(request.user)):
+        answer.dislikes.remove(request.user)
+    #save changes to answer
+    answer.save()
+    return redirect(f'/answer/{pk}')
+
+def dislike_answer(request, pk):
+    answer = Answer.objects.get(pk=pk)
+    #toggle dislike
+    if(answer.dislikes.contains(request.user)):
+        answer.dislikes.remove(request.user)
+    else:
+        answer.dislikes.add(request.user)
+    #remove dislike from answer if it exists
+    if(answer.likes.contains(request.user)):
+        answer.likes.remove(request.user)
+    #save changes to answer
+    answer.save()
+    return redirect(f'/answer/{pk}')

@@ -17,7 +17,7 @@ class Question(models.Model):
     body = RichTextField(blank=True, null=True)
     date = models.DateField(auto_now_add=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='question_user')
     def get_absolute_url(self):
         return reverse('question_index')
     
@@ -30,7 +30,9 @@ class Answer(models.Model):
     body = RichTextField()
     date = models.DateField(auto_now_add=True, blank=True)
     likes = models.ManyToManyField(User)
-
+    dislikes = models.ManyToManyField(User, related_name='answer_dislikes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answer_user')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     def get_absolute_url(self):
         return reverse('answer_index')
     
@@ -42,7 +44,8 @@ class Reply(models.Model):
     title = models.CharField(max_length=200)
     body = RichTextField()
     date = models.DateField(auto_now_add=True, blank=True)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reply_user')
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     def get_absolute_url(self):
         return reverse('reply_index')
     
