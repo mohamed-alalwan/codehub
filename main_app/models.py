@@ -50,15 +50,6 @@ class Reply(models.Model):
     def __str__(self):
         return self.title
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    points = models.IntegerField(default=0)
-    avatar = models.ImageField(upload_to='main_app/static/images/profile/', blank=True)
-    bio = models.TextField(max_length=250, blank=True)
-
-    def __str__(self):
-        return str(self.user)
-
 class Badges(models.Model):
     name = models.CharField(max_length=100)
     avatar = models.ImageField(upload_to='main_app/static/images/badges/', blank=True)
@@ -66,3 +57,13 @@ class Badges(models.Model):
 
     def __str__(self):
         return self.name
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    points = models.IntegerField(default=0)
+    avatar = models.ImageField(upload_to='main_app/static/images/profile/', blank=True)
+    bio = models.TextField(max_length=250, blank=True)
+    badges = models.ManyToManyField(Badges)
+
+    def __str__(self):
+        return str(self.user)

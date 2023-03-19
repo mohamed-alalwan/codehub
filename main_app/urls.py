@@ -32,7 +32,20 @@ urlpatterns = [
     # Profile Urls
     path('profile/', views.profile_index, name='profile_index'),
     path('profile/update', views.profile_update, name='profile_update'),
+    
 
     # Category Urls
     path('category/<int:category_id>', views.category_detail, name='category_detail'),
+
+    # Badges Urls
+    path('badges/', views.BadgeList.as_view(), name='badges_index'),
+    path('badges/<int:pk>', views.BadgeDetail.as_view(), name='badges_detail'),
+    path('badges/create', views.BadgeCreate.as_view(), name='badges_create'),
+    path('badges/<int:pk>/update/', views.BadgeUpdate.as_view(), name='badges_update'),
+    path('badges/<int:pk>/delete/', views.BadgeDelete.as_view(), name='badges_delete'),
+    #associate a profile with a badge
+    path('profile/<int:profile_id>/assoc_badges/<int:badge_id>/', views.assoc_badges, name='assoc_badges'),
+
+    #unassociate a profile from badge
+    path('profile/<int:profile_id>/unassoc_badges/<int:badge_id>/', views.unassoc_badges, name='unassoc_badges'),
 ]
