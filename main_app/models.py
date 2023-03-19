@@ -2,8 +2,7 @@ from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
-from django_ckeditor_5.fields import CKEditor5Field
-from ckeditor_uploader.fields import RichTextUploadingField
+
 
 # Create your models here.
 class Category(models.Model):
