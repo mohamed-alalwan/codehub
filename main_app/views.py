@@ -1,7 +1,7 @@
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Question, Category, Answer, Reply, Profile, Badges
+from .models import Question, Category, Answer, Reply, Profile, Badge
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import login
@@ -173,7 +173,7 @@ def change_password(request):
 @login_required
 def profile_index(request):
     profile = Profile.objects.get(user = request.user)
-    badges_profile_doesnt_have = Badges.objects.exclude(id__in = profile.badges.all().values_list('id'))
+    badges_profile_doesnt_have = Badge.objects.exclude(id__in = profile.badges.all().values_list('id'))
     return render(request, 'profile/index.html', {'badges' : badges_profile_doesnt_have} )
 
 @login_required
@@ -200,31 +200,31 @@ def category_detail(request, category_id):
     questions = Question.objects.filter(category=category).order_by('-date')
     return render(request, 'category/detail.html', {'category': category, 'questions': questions})
 
-class BadgeList(LoginRequiredMixin,ListView):
-    model = Badges
+class BadgeList(ListView):
+    model = Badge
 
-class BadgeDetail(LoginRequiredMixin,DetailView):
-    model = Badges
+class BadgeDetail(DetailView):
+    model = Badge
 
-class BadgeCreate(LoginRequiredMixin,CreateView):
-    model = Badges
+class BadgeCreate(CreateView):
+    model = Badge
     fields = '__all__'
 
-class BadgeUpdate(LoginRequiredMixin,UpdateView):
-    model = Badges
+class BadgeUpdate(UpdateView):
+    model = Badge
     fields = '__all__'
 
 
-class BadgeDelete(LoginRequiredMixin,DeleteView):
-    model = Badges
+class BadgeDelete(DeleteView):
+    model = Badge
     success_url = '/profile/'
 
 @login_required
-def assoc_badges(request, profile_id, badge_id):
+def add_badge(request, profile_id, badge_id):
     Profile.objects.get(id=profile_id).badges.add(badge_id)
     return redirect('/profile/')
 
 @login_required
-def unassoc_badges(request, profile_id, badge_id):
+def remove_badge(request, profile_id, badge_id):
     Profile.objects.get(id=profile_id).badges.remove(badge_id)
     return redirect('/profile/')

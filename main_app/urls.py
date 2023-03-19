@@ -48,8 +48,8 @@ urlpatterns = [
     path('badges/<int:pk>/delete/', views.BadgeDelete.as_view(), name='badges_delete'),
 
     #associate a profile with a badge
-    path('profile/<int:profile_id>/assoc_badges/<int:badge_id>/', views.assoc_badges, name='assoc_badges'),
+    path('profile/<int:profile_id>/add_badge/<int:badge_id>/', views.add_badge, name='add_badge'),
 
     #unassociate a profile from badge
-    path('profile/<int:profile_id>/unassoc_badges/<int:badge_id>/', views.unassoc_badges, name='unassoc_badges'),
+    path('profile/<int:profile_id>/remove_badge/<int:badge_id>/', views.remove_badge, name='remove_badge'),
 ]

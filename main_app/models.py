@@ -49,7 +49,7 @@ class Reply(models.Model):
     def __str__(self):
         return self.title
 
-class Badges(models.Model):
+class Badge(models.Model):
     name = models.CharField(max_length=100)
     avatar = models.ImageField(upload_to='main_app/static/images/badges/', blank=True)
     point_limit = models.IntegerField()
@@ -62,7 +62,7 @@ class Profile(models.Model):
     points = models.IntegerField(default=0)
     avatar = models.ImageField(upload_to='main_app/static/images/profile/', blank=True)
     bio = models.TextField(max_length=250, blank=True)
-    badges = models.ManyToManyField(Badges)
+    badges = models.ManyToManyField(Badge)
 
     def __str__(self):
         return str(self.user)
