@@ -3,7 +3,6 @@
 <h1>Question Details</h1>
 
 <div class="card">
-  <a href="/question/{{question.id}}" class="card-a">
     <div class="card-content ">
       <div class="flex-container">
         <div>
@@ -13,7 +12,7 @@
         </div>
       </div>
     </div>
-  </a>
+  
   {% if user.is_authenticated %}
   {% comment %} {% if  %}{% endif %} {% endcomment %}
   <div class="card-action">
