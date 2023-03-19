@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5b%43!n@o^0if$skn^hpjx32*k-@dka6!d(d1_n)+lnft4!3#y'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
+    'ckeditor_uploader',
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -78,12 +80,12 @@ WSGI_APPLICATION = 'codehub.wsgi.application'
 
 DATABASES = {
   'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'neondb',
-    'USER': 'mohamed-alalwan',
-    'PASSWORD': 'VXRa9ZbxGKq2',
-    'HOST': 'ep-sparkling-cloud-185449.eu-central-1.aws.neon.tech',
-    'PORT': '5432',
+    'ENGINE': config('ENGINE'),
+    'NAME': config('NAME'),
+    'USER': config('USER'),
+    'PASSWORD': config('PASSWORD'),
+    'HOST': config('HOST'),
+    'PORT': config('PORT'),
   }
 }
 
@@ -123,12 +125,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT ='static/'
 
 #Specify Login Redirect
 LOGIN_REDIRECT_URL = '/'
 
 #Specify Login Redirect
 LOGOUT_REDIRECT_URL = '/'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'extraPlugins': ','.join(
+            [
+                'codesnippet',
+            ]),
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
