@@ -16,7 +16,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 # =======================Category Section========================
 
 def home(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('id')
     questions = None
     for category in categories:
         if(questions is None):
