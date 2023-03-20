@@ -13,19 +13,19 @@ urlpatterns = [
     path('question/<int:question_id>/', views.question_detail, name='question_detail'),
     path('question/<int:pk>/update/', views.QuestionUpdate.as_view(), name='update_question'),
     path('question/<int:pk>/delete/', views.QuestionDelete.as_view(), name='question_delete'),
+    #add answer to question
+    path('question/<int:question_id>/add_answer', views.answer_create, name='answer_create'),
 
     # Answer Urls
     path('answer/', views.answer_index, name="answer_index"),
-
-    path('question/<int:question_id>/add_answer', views.answer_create, name='answer_create'),
-
     path('answer/<int:answer_id>/', views.answer_detail, name="answer_detail"),
     path('answer/<int:pk>/update/', views.AnswerUpdate.as_view(), name="answer_update"),
     path('answer/<int:pk>/delete/', views.AnswerDelete.as_view(), name="answer_delete"),
+    #add reply to question
+    path('answer/<int:answer_id>/add_reply', views.reply_create, name='reply_create'),
    
     # Reply Urls
     path('reply/', views.reply_index, name="reply_index"),
-    path('reply/create', views.CreateReply.as_view(), name="create_reply"),
     path('reply/<int:reply_id>', views.reply_detail, name="reply_detail"),
     path('reply/<int:pk>/update/', views.ReplyUpdate.as_view(), name="reply_update"),
     path('reply/<int:pk>/delete/', views.ReplyDelete.as_view(), name="reply_delete"),
