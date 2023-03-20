@@ -165,7 +165,7 @@ code {
     font-size: 105%;
   }
 
-/* .q {
-    font-weight: bold;
-    font-size: larger;
-} */
+.comment img{
+    width: 50px;
+    height: 50px;
+}
