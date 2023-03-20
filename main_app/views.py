@@ -8,7 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm, CreateAnswerForm
+from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm, CreateAnswerForm, CreateReplyForm
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -50,7 +50,7 @@ class CreateQuestion(LoginRequiredMixin,CreateView):
     
 class QuestionUpdate(LoginRequiredMixin, UpdateView):
     model = Question
-    fields = '__all__'
+    fields = ['title', 'body', 'category']
 
 class QuestionDelete(LoginRequiredMixin , DeleteView):
     model = Question
@@ -67,15 +67,9 @@ def answer_index(request):
 @login_required
 def answer_detail(request, answer_id):
     answer= Answer.objects.get(id=answer_id)
-    return render(request, 'answer/answer_detail.html', {'answer': answer })
-
-# class CreateAnswer(LoginRequiredMixin,CreateView):
-#     model= Answer
-#     fields = ['title', 'body']
-#     def form_valid(self, form) :
-#         form.instance.user = self.request.user
-#         form.instance.question = Question.objects.get(id=9)
-#         return super().form_valid(form)
+    replies = Reply.objects.filter(answer=answer).order_by('-id')
+    reply_form = CreateReplyForm()
+    return render(request, 'answer/answer_detail.html', {'answer': answer, 'replies': replies, 'reply_form': reply_form})
 
 def answer_create(request, question_id):
     form = CreateAnswerForm(request.POST)
@@ -88,7 +82,7 @@ def answer_create(request, question_id):
 
 class AnswerUpdate(LoginRequiredMixin,UpdateView):
     model = Answer
-    fields = '__all__'
+    fields = ['title', 'body']
 
 class AnswerDelete(LoginRequiredMixin,DeleteView):
     model = Answer
@@ -106,9 +100,18 @@ def reply_detail(request, reply_id):
     reply = Reply.objects.get(id=reply_id)
     return render(request, 'reply/reply_detail.html', {'reply': reply })
 
-class CreateReply(LoginRequiredMixin,CreateView):
-    model= Reply
-    fields = '__all__'
+# class CreateReply(LoginRequiredMixin,CreateView):
+#     model= Reply
+#     fields = '__all__'
+
+def reply_create(request, answer_id):
+    form = CreateReplyForm(request.POST)
+    if form.is_valid():
+        reply = form.save(commit=False)
+        reply.answer = Answer.objects.get(id=answer_id)
+        reply.user = request.user
+        reply.save()
+    return redirect('answer_detail', answer_id = answer_id)
     
 
 class ReplyUpdate(LoginRequiredMixin,UpdateView):

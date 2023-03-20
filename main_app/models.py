@@ -19,7 +19,7 @@ class Question(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='question_user')
     def get_absolute_url(self):
-        return reverse('question_index')
+        return reverse('question_detail', args=([str(self.id)]))
     
     def __str__(self):
         return self.title
@@ -34,7 +34,7 @@ class Answer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answer_user')
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     def get_absolute_url(self):
-        return reverse('answer_index')
+        return reverse('question_detail', args=([str(self.question.id)]))
     
     def __str__(self):
         return self.title
