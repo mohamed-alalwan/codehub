@@ -77,6 +77,7 @@ def answer_detail(request, answer_id):
 #         form.instance.question = Question.objects.get(id=9)
 #         return super().form_valid(form)
 
+@login_required
 def answer_create(request, question_id):
     form = CreateAnswerForm(request.POST)
     if form.is_valid():
