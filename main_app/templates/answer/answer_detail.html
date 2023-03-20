@@ -21,12 +21,20 @@
     <a class="btn blue" href="{% url 'answer_delete' answer.id %}">Delete</a>
     <form action="{% url 'like_answer' answer.id %}" method="post" style="display: inline-block;">
       {% csrf_token %}
-      <button type="submit" class="btn blue"><i class="material-icons right">thumb_up</i>{{ answer.likes.count }} {% if user in answer.likes.all %}Unlike{% else %}Like{% endif %}</button>
+      {% if user in answer.likes.all %}
+      <button type="submit" class="btn white black-text"><i class="material-icons right blue-text">thumb_up</i>{{ answer.likes.count }} </button>
+      {% else %}
+      <button type="submit" class="btn white black-text"><i class="material-icons right">thumb_up</i>{{ answer.likes.count }} </button>
+      {% endif %}
     </form>
     <form action="{% url 'dislike_answer' answer.id %}" method="post" style="display: inline-block;">
       {% csrf_token %}
-      <button type="submit" class="btn blue"><i class="material-icons right">thumb_down</i>{{ answer.dislikes.count }} {% if user in answer.dislikes.all %}Un-Dislike{% else %}Dislike{% endif %}</button>
+      {% if user in answer.dislikes.all %}
+      <button type="submit" class="btn white black-text"><i class="material-icons right blue-text">thumb_down</i>{{ answer.dislikes.count }} </button>
+      {% else %}
+      <button type="submit" class="btn white black-text"><i class="material-icons right">thumb_down</i>{{ answer.dislikes.count }} </button>
+      {% endif %}
     </form>
   </div>
-  </div>
+</div>
    {% endblock %}

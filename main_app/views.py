@@ -8,10 +8,8 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm
+from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm, CreateAnswerForm
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
 
 
 
@@ -39,7 +37,9 @@ def question_index(request):
 
 def question_detail(request, question_id):
     question= Question.objects.get(id=question_id)
-    return render(request, 'question/question_detail.html', {'question': question})
+    answers = Answer.objects.filter(question=question).order_by('-id')
+    answer_form = CreateAnswerForm()
+    return render(request, 'question/question_detail.html', {'question': question, 'answers':answers, 'answer_form': answer_form})
 
 class CreateQuestion(LoginRequiredMixin,CreateView):
     model= Question
@@ -69,13 +69,22 @@ def answer_detail(request, answer_id):
     answer= Answer.objects.get(id=answer_id)
     return render(request, 'answer/answer_detail.html', {'answer': answer })
 
-class CreateAnswer(LoginRequiredMixin,CreateView):
-    model= Answer
-    fields = ['title', 'body']
-    def form_valid(self, form) :
-        form.instance.user = self.request.user
-        form.instance.question = Question.objects.get(id=9)
-        return super().form_valid(form)
+# class CreateAnswer(LoginRequiredMixin,CreateView):
+#     model= Answer
+#     fields = ['title', 'body']
+#     def form_valid(self, form) :
+#         form.instance.user = self.request.user
+#         form.instance.question = Question.objects.get(id=9)
+#         return super().form_valid(form)
+
+def answer_create(request, question_id):
+    form = CreateAnswerForm(request.POST)
+    if form.is_valid():
+        answer = form.save(commit=False)
+        answer.question = Question.objects.get(id=question_id)
+        answer.user = request.user
+        answer.save()
+    return redirect('question_detail', question_id = question_id)
 
 class AnswerUpdate(LoginRequiredMixin,UpdateView):
     model = Answer

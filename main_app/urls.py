@@ -16,7 +16,9 @@ urlpatterns = [
 
     # Answer Urls
     path('answer/', views.answer_index, name="answer_index"),
-    path('answer/create', views.CreateAnswer.as_view(), name='create_answer'),
+
+    path('question/<int:question_id>/add_answer', views.answer_create, name='answer_create'),
+
     path('answer/<int:answer_id>/', views.answer_detail, name="answer_detail"),
     path('answer/<int:pk>/update/', views.AnswerUpdate.as_view(), name="answer_update"),
     path('answer/<int:pk>/delete/', views.AnswerDelete.as_view(), name="answer_delete"),
