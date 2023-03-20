@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import Profile
+from .models import Profile, Answer
+from ckeditor.widgets import CKEditorWidget
+
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField()
@@ -29,3 +31,8 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['avatar', 'bio']
+
+class CreateAnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ['title', 'body']
