@@ -12,6 +12,8 @@
   </ul>
 </nav>
 
+
+<!--==================================Question Detail Section===============================-->
 <h1>Question Details</h1>
 
 <div class="card">
@@ -23,13 +25,18 @@
           <p>Date: {{ question.date }}</p>
           {% load static %}
           <div class="profile-container profile-header comment">
-            <img src="{% if question.user.profile.avatar %}{% static question.user.profile.avatar|cut:'main_app/static/' %}{% else %}{% static 'images/profile/guest.png' %}{% endif %}" style="vertical-align: middle;">
+            <img src="{% if question.user.profile.avatar %}
+            {% static question.user.profile.avatar|cut:'main_app/static/' %}
+            {% else %}{% static 'images/profile/guest.png' %}{% endif %}" 
+            style="vertical-align: middle;">
             <span>{{ question.user.username }}</span>
           </div>
         </div>
       </div>
     </div>
   
+
+  <!--Question Card Section-->
   {% if user.is_authenticated %}
   {% if user.id is question.user.id %}
   <div class="card-action">
@@ -40,6 +47,9 @@
   {% endif %}
   </div>
 
+
+
+  <!--==================================Answer Detail Section===============================-->
   <form action="{% url 'answer_create' question.id %}" method="post">
     {% csrf_token %}
     {{ answer_form.media }}
@@ -59,7 +69,10 @@
           <p>Date: {{ answer.date }}</p>
           {% load static %}
           <div class="profile-container profile-header comment">
-            <img src="{% if answer.user.profile.avatar %}{% static answer.user.profile.avatar|cut:'main_app/static/' %}{% else %}{% static 'images/profile/guest.png' %}{% endif %}" style="vertical-align: middle;">
+            <img src="{% if answer.user.profile.avatar %}
+            {% static answer.user.profile.avatar|cut:'main_app/static/' %}
+            {% else %}{% static 'images/profile/guest.png' %}{% endif %}" 
+            style="vertical-align: middle;">
             <span>{{ answer.user.username }}</span>
           </div>
           
@@ -69,7 +82,7 @@
     </div>
     <div class="card-action">
 
-      <!--Edit and Delete-->
+      <!--Answer Card Section-->
       {% if user.is_authenticated %}
       {% if user.id is answer.user.id %}
       <a class="btn blue" href="{% url 'answer_update' answer.id %}">Edit</a>
@@ -77,8 +90,9 @@
       {% endif %}
       {% endif %}
 
-      <!--Like-->
-      <form action="{% url 'like_answer' answer.id %}" method="post" style="display: inline-block;">
+      <!--Like Button-->
+      <form action="{% url 'like_answer' answer.id %}" method="post" 
+      style="display: inline-block;">
         {% csrf_token %}
         {% if user in answer.likes.all %}
         <button type="submit" class="btn white black-text">
@@ -93,8 +107,9 @@
         {% endif %}
       </form>
 
-      <!--Dislike-->
-      <form action="{% url 'dislike_answer' answer.id %}" method="post" style="display: inline-block;">
+      <!--Dislike Button-->
+      <form action="{% url 'dislike_answer' answer.id %}" 
+      method="post" style="display: inline-block;">
         {% csrf_token %}
         {% if user in answer.dislikes.all %}
         <button type="submit" class="btn white black-text">

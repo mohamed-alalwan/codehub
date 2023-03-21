@@ -61,7 +61,7 @@ class QuestionDelete(LoginRequiredMixin , DeleteView):
 
 @login_required
 def answer_index(request):
-    answers = Answer.objects.all()
+    answers = Answer.objects.filter(user = request.user)
     return render(request,'answer/answer_index.html', {'answers': answers})
 
 @login_required

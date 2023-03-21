@@ -21,11 +21,14 @@
     <!-- Static Scripts -->
     <script src="{% static 'scripts/app.js' %}" defer></script>
 </head>
+
+
 <body>
     <nav id="navbar" class="nav-wraper grey darken-4">
         <div class="container">
             <a href="/" class="brand-logo">
-                <img class="logo-image" src="{% static 'images/icons/logo1.png' %}" alt="logo"> <span>CodeHub</span>
+                <img class="logo-image" src="{% static 'images/icons/logo1.png' %}"
+                 alt="logo"> <span>CodeHub</span>
             </a>
             <a href="#!" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
@@ -35,12 +38,17 @@
                 <li>
                     <a class="dropdown-trigger" href="{% url 'profile_index' %}">
                         <div class="profile-container">
-                            <img src="{% if user.profile.avatar %}{% static user.profile.avatar|cut:'main_app/static/' %}{% else %}{% static 'images/profile/guest.png' %}{% endif %}" style="vertical-align: middle;">
+                            <img src="{% if user.profile.avatar %}
+                            {% static user.profile.avatar|cut:'main_app/static/' %}
+                            {% else %}{% static 'images/profile/guest.png' %}
+                            {% endif %}" style="vertical-align: middle;">
                             <span>{{ user.username }}</span>
                         </div>
                     </a>
                 </li>
                 {% endif %}
+
+                
                 <li><a  href="{% url 'home' %}">Home</a></li>
                 <li><a  href="{% url 'about' %}">FAQ</a></li>
                 {% if user.is_authenticated == False %}

@@ -12,18 +12,12 @@
   </ul>
 </nav>
 
+
+
+<!--==============================Answer Detail Section=========================-->
 <h1>Answer Detail</h1>
 
 <div class="card">
-  <a href="/answer/{{answer.id}}" class="card-a">
-    <div class="card-content ">
-      <div class="flex-container">
-        <div>
-          <span class="card-title">Title: {{ answer.title }}</span>
-          
-          <p>Body: {{ answer.body|safe}}</p>
-          <p>Date: {{ answer.date }}</p>
-         
   <div class="card-content ">
     <div class="flex-container">
       <div>
@@ -32,7 +26,10 @@
         <p>Date: {{ answer.date }}</p>
         {% load static %}
         <div class="profile-container profile-header comment">
-          <img src="{% if answer.user.profile.avatar %}{% static answer.user.profile.avatar|cut:'main_app/static/' %}{% else %}{% static 'images/profile/guest.png' %}{% endif %}" style="vertical-align: middle;">
+          <img src="{% if answer.user.profile.avatar %}
+          {% static answer.user.profile.avatar|cut:'main_app/static/' %}
+          {% else %}{% static 'images/profile/guest.png' %}{% endif %}"
+           style="vertical-align: middle;">
           <span>{{ answer.user.username }}</span>
         </div>
       </div>
@@ -47,13 +44,15 @@
     {% endif %}
 
 
-    <form action="{% url 'like_answer' answer.id %}" method="post" style="display: inline-block;">
+<!--Like button-->
+    <form action="{% url 'like_answer' answer.id %}" method="post" 
+    style="display: inline-block;">
       {% csrf_token %}
       {% if user in answer.likes.all %}
       <button type="submit" class="btn white black-text">
         <i class="material-icons right blue-text">thumb_up</i>
         {{ answer.likes.count }}
-       </button>
+      </button>
       {% else %}
       <button type="submit" class="btn white black-text">
         <i class="material-icons right">thumb_up</i>
@@ -61,7 +60,11 @@
       </button>
       {% endif %}
     </form>
-    <form action="{% url 'dislike_answer' answer.id %}" method="post" style="display: inline-block;">
+
+
+    <!--Dislike button-->
+    <form action="{% url 'dislike_answer' answer.id %}" method="post" 
+    style="display: inline-block;">
       {% csrf_token %}
       {% if user in answer.dislikes.all %}
       <button type="submit" class="btn white black-text">
@@ -78,6 +81,8 @@
   </div>
 </div>
 
+
+<!--==================================Reply Detail Section===============================-->
 <form action="{% url 'reply_create' answer.id %}" method="post">
   {% csrf_token %}
   {{ reply_form.media }}
@@ -86,9 +91,8 @@
 </form>
 
 <hr>
+
 {% for reply in replies %}
-
-
 <div class="card">
     <div class="card-content ">
       <div class="flex-container">
@@ -98,15 +102,24 @@
           <p>Date: {{ reply.date }}</p>
           {% load static %}
           <div class="profile-container profile-header comment">
-            <img src="{% if reply.user.profile.avatar %}{% static reply.user.profile.avatar|cut:'main_app/static/' %}{% else %}{% static 'images/profile/guest.png' %}{% endif %}" style="vertical-align: middle;">
+            <img src="{% if reply.user.profile.avatar %}
+            {% static reply.user.profile.avatar|cut:'main_app/static/' %}
+            {% else %}{% static 'images/profile/guest.png' %}{% endif %}" 
+            style="vertical-align: middle;">
             <span>{{ reply.user.username }}</span>
           </div>
         </div>
       </div>
     </div>
+
+    <!--Reply Card Section-->
   <div class="card-action">
+    {% if user.is_authenticated %}
+    {% if user.id is reply.user.id %}
     <a class="btn blue" href="{% url 'reply_update' reply.id %}">Edit</a>
     <a class="btn blue" href="{% url 'reply_delete' reply.id %}">Delete</a>
+    {% endif %}
+    {% endif %}
   </div>
   </div>
 
