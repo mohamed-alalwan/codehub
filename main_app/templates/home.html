@@ -2,9 +2,9 @@
 {% block content %}
 <h1>Welcome to CodeHub</h1>
 <h5>Featuring Categories:</h5>
-{% for category in categories %}
 <ul class="collapsible">
-    <li class="active">
+{% for category in categories %}
+    <li class="{% if category.id is categories.first.id %}active{% endif %}">
       <div class="collapsible-header">
           <i class="material-icons">{{ category.icon_code }}</i>
           <!--Category Name-->
@@ -43,8 +43,8 @@
         <a id="submit-btn" href="/category/{{category.id}}" class="blue-grey lighten-2 btn"><i class="material-icons left">view_list</i> View More</a>
       </div>
     </li>
-</ul>
 {% endfor %}
+</ul>
 
 {% for message in messages %}
 <script>
