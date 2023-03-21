@@ -5,8 +5,8 @@
   <ul class="blue-text">
       <li> 
         <a class="btn grey darken-4" href="{% url 'category_detail' question.category.id %}">
-          <i class="material-icons left">arrow_back_ios</i>
-          Return to Question List
+          <i class="material-icons left">{{ question.category.icon_code }}</i>
+          {{ question.category.name }} Questions
         </a>
       </i>
   </ul>
