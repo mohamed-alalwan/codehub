@@ -33,7 +33,8 @@ def about(request):
 
 def question_index(request):
     questions = Question.objects.all()
-    return render(request,'question/question_index.html', {'questions': questions})
+    categories = Category.objects.all().order_by('id')
+    return render(request,'question/question_index.html', {'questions': questions, 'categories': categories})
 
 def question_detail(request, question_id):
     question= Question.objects.get(id=question_id)

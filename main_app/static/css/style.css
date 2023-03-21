@@ -181,3 +181,9 @@ code {
 #cke_id_body{
     width: 100% !important;
 }
+
+/*FAQ*/
+.q {
+    font-size: x-large;
+    
+}
