@@ -17,7 +17,7 @@ urlpatterns = [
     path('question/<int:question_id>/add_answer', views.answer_create, name='answer_create'),
 
     # Answer Urls
-    path('answer/', views.answer_index, name="answer_index"),
+   
     path('answer/<int:answer_id>/', views.answer_detail, name="answer_detail"),
     path('answer/<int:pk>/update/', views.AnswerUpdate.as_view(), name="answer_update"),
     path('answer/<int:pk>/delete/', views.AnswerDelete.as_view(), name="answer_delete"),
@@ -37,6 +37,7 @@ urlpatterns = [
     # Profile Urls
     path('profile/', views.profile_index, name='profile_index'),
     path('profile/update', views.profile_update, name='profile_update'),
+    path('profile/answer/', views.answer_index, name="profile_answer"),
     
     # Category Urls
     path('category/<int:category_id>', views.category_detail, name='category_detail'),
