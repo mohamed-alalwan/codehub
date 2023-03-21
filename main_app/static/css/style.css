@@ -188,6 +188,10 @@ code {
     font-weight: 400;
 }
 
-.a{
+/* .a{
     
+} */
+
+label {
+    font-size: larger !important;
 }
