@@ -16,7 +16,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 # =======================Category Section========================
 
 def home(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('id')
     questions = None
     for category in categories:
         if(questions is None):
@@ -33,7 +33,8 @@ def about(request):
 
 def question_index(request):
     questions = Question.objects.all()
-    return render(request,'question/question_index.html', {'questions': questions})
+    categories = Category.objects.all().order_by('id')
+    return render(request,'question/question_index.html', {'questions': questions, 'categories': categories})
 
 def question_detail(request, question_id):
     question= Question.objects.get(id=question_id)
