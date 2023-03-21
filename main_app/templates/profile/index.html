@@ -23,65 +23,15 @@
     {% endif %}
 </div>
 
-{% for message in messages %}
-<script>
-  M.toast({html: '{{ message }}'})
-</script>
-{% endfor %}
 <hr>
-<div class="row">
-    <div class="col s6">
-      <h3>Badges</h3>
-      {% if user.profile.badges.count %}
-        {% for badges in user.profile.badges.all %}
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">
-                A <span style="point_limit: {{ badges.point_limit }};">{{ badges.point_limit }} </span>
-                {{ badges.name }}
-              </span>
-            </div>
-            <div class="card-action">
-              <form action="{% url 'remove_badge' user.profile.id badges.id%}" method="post">
-                {% csrf_token %}
-                <button id="submit-btn" class="btn waves-effect waves-light red" type="submit" name="Confirm">Remove
-                  <i class="material-icons left">cancel</i>
-                </button>
-              </form>
-            </div>
-          </div>
-        {% endfor %}
-      {% else %}
-          <p>No badges for {{ user.first_name }} yet...</p>
-      {% endif %}
-    </div>
 
-    <div class="col s6">
-      <h3>Available badges</h3>
-      {% if badges.count  %}
-        {% for badge in badges.all %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">
-              A <span>{{ badge.point_limit }}</span>
-              {{ badge.name }}
-            </span>
-          </div>
-          <div class="card-action">
-            <form action="{% url 'add_badge' user.profile.id badge.id %}" method="post">
-              {% csrf_token %}
-              <button id="submit-btn" class="btn waves-effect waves-light red" type="submit" name="Confirm">Add
-                <i class="material-icons left">add_circle</i>
-              </button>
-            </form>
-          </div>
-        </div>
-        
-        {% endfor %}
-      {% else %}
-      <p>{{ user.first_name }} all ready has all the badges avaiable...</p>
-      {% endif %}
-    </div>
-  </div>
-
+<h4>Badges</h4>
+{% if user.profile.badges.count %}
+  {% for badges in user.profile.badges.all %}
+  <img width="150" height="150" src="{% static badges.avatar|cut:'main_app/static/' %}">
+     
+  {% endfor %}
+{% else %}
+    <p>No badges for {{ user.first_name }} yet...</p>
+{% endif %}
 {% endblock %}

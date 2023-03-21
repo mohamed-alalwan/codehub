@@ -42,19 +42,6 @@ urlpatterns = [
     # Category Urls
     path('category/<int:category_id>', views.category_detail, name='category_detail'),
 
-    # Badges Urls
-    path('badges/', views.BadgeList.as_view(), name='badges_index'),
-    path('badges/<int:pk>', views.BadgeDetail.as_view(), name='badges_detail'),
-    path('badges/create', views.BadgeCreate.as_view(), name='badges_create'),
-    path('badges/<int:pk>/update/', views.BadgeUpdate.as_view(), name='badges_update'),
-    path('badges/<int:pk>/delete/', views.BadgeDelete.as_view(), name='badges_delete'),
-
-    # add badge to profile
-    path('profile/<int:profile_id>/add_badge/<int:badge_id>/', views.add_badge, name='add_badge'),
-
-    # remove badge from profile
-    path('profile/<int:profile_id>/remove_badge/<int:badge_id>/', views.remove_badge, name='remove_badge'),
-
     # like answer
     path('like/<int:pk>/answer', views.like_answer, name='like_answer'),
 
