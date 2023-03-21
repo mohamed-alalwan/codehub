@@ -194,7 +194,6 @@ def profile_update(request):
 
 # =======================Category Section========================
 
-@login_required
 def category_detail(request, category_id):
     category = Category.objects.get(id=category_id)
     questions = Question.objects.filter(category=category).order_by('-date')
