@@ -102,10 +102,6 @@ def reply_detail(request, reply_id):
     reply = Reply.objects.get(id=reply_id)
     return render(request, 'reply/reply_detail.html', {'reply': reply })
 
-# class CreateReply(LoginRequiredMixin,CreateView):
-#     model= Reply
-#     fields = '__all__'
-
 def reply_create(request, answer_id):
     form = CreateReplyForm(request.POST)
     if form.is_valid():
@@ -202,33 +198,19 @@ def category_detail(request, category_id):
 
 # =======================Badge Section========================
 
-class BadgeList(ListView):
-    model = Badge
+def check_badge(user, point_difference):
+    #modify user profile points
+    profile = Profile.objects.get(user=user)
+    profile.points += point_difference
 
-class BadgeDetail(DetailView):
-    model = Badge
+    #add badge to user profile
+    badges = Badge.objects.filter(point_limit=profile.points)
 
-class BadgeCreate(CreateView):
-    model = Badge
-    fields = '__all__'
+    for badge in badges:
+        if(not profile.badges.contains(badge)):
+            profile.badges.add(badge)
 
-class BadgeUpdate(UpdateView):
-    model = Badge
-    fields = '__all__'
-
-class BadgeDelete(DeleteView):
-    model = Badge
-    success_url = '/profile/'
-
-@login_required
-def add_badge(request, profile_id, badge_id):
-    Profile.objects.get(id=profile_id).badges.add(badge_id)
-    return redirect('/profile/')
-
-@login_required
-def remove_badge(request, profile_id, badge_id):
-    Profile.objects.get(id=profile_id).badges.remove(badge_id)
-    return redirect('/profile/')
+    profile.save()
 
 # =======================Like/Dislike Section========================
 
@@ -237,25 +219,29 @@ def like_answer(request, pk):
     #toggle like
     if(answer.likes.contains(request.user)):
         answer.likes.remove(request.user)
+        check_badge(answer.user, -1)
     else:
         answer.likes.add(request.user)
+        check_badge(answer.user, 1)
     #remove dislike from answer if it exists
     if(answer.dislikes.contains(request.user)):
         answer.dislikes.remove(request.user)
     #save changes to answer
     answer.save()
-    return redirect(f'/answer/{pk}')
+    return redirect(f'/question/{answer.question.id}')
 
 def dislike_answer(request, pk):
     answer = Answer.objects.get(pk=pk)
     #toggle dislike
     if(answer.dislikes.contains(request.user)):
         answer.dislikes.remove(request.user)
+        check_badge(answer.user, 1)
     else:
         answer.dislikes.add(request.user)
+        check_badge(answer.user, -1)
     #remove dislike from answer if it exists
     if(answer.likes.contains(request.user)):
         answer.likes.remove(request.user)
     #save changes to answer
     answer.save()
-    return redirect(f'/answer/{pk}')
+    return redirect(f'/question/{answer.question.id}')
