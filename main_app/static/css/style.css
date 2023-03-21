@@ -184,6 +184,10 @@ code {
 
 /*FAQ*/
 .q {
-    font-size: x-large;
+    font-size: large;
+    font-weight: 400;
+}
+
+.a{
     
 }
