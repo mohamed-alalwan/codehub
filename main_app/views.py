@@ -5,6 +5,7 @@ from .models import Question, Category, Answer, Reply, Profile, Badge
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -32,9 +33,22 @@ def about(request):
 # =======================Qustion Section========================
 
 def question_index(request):
-    questions = Question.objects.all()
+    #Search for questions
+    search = request.GET.get('search')
+    category = request.GET.get('category')
+    sort = request.GET.get('sort')
+    
+    if(search is None):
+        questions = Question.objects.all()
+    else:
+        questions = Question.objects.filter(title__icontains = search)
     categories = Category.objects.all().order_by('id')
-    return render(request,'question/question_index.html', {'questions': questions, 'categories': categories})
+    return render(request,'question/question_index.html', 
+    {'questions': questions, 'categories': categories})
+
+def question_profile(request):
+    questions = Question.objects.filter(user = request.user)
+    return render(request,'question/questionp_index.html', {'questions': questions})
 
 def question_detail(request, question_id):
     question= Question.objects.get(id=question_id)
@@ -171,6 +185,14 @@ def profile_index(request):
     profile = Profile.objects.get(user = request.user)
     badges_profile_doesnt_have = Badge.objects.exclude(id__in = profile.badges.all().values_list('id'))
     return render(request, 'profile/index.html', {'badges' : badges_profile_doesnt_have} )
+
+def profile2_index(request):
+    profiles = Profile.objects.all()
+    return render(request,'profile/profile2_index.html', {'profiles': profiles})
+
+def profile_detail(request, user_id):
+    user = User.objects.get(id=user_id)
+    return render(request, 'profile/profile_detail.html', {'selected_user': user })
 
 @login_required
 def profile_update(request):

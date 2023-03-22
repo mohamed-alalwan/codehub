@@ -36,8 +36,11 @@ urlpatterns = [
     
     # Profile Urls
     path('profile/', views.profile_index, name='profile_index'),
+    path('profile/list', views.profile2_index, name='profile2_index'),
     path('profile/update', views.profile_update, name='profile_update'),
     path('profile/answer/', views.answer_index, name="profile_answer"),
+    path('profile/question/', views.question_profile, name="profile_question"),
+    path('profile/<int:user_id>', views.profile_detail, name='profile_detail'),
     
     # Category Urls
     path('category/<int:category_id>', views.category_detail, name='category_detail'),

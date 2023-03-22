@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1>Profiles</h1>
+{% load static %}
+{% for profile in profiles %}
+<div class="card">
+  <img class="circle right" width="50" height="50" src="{% if profile.avatar %}{% static profile.avatar|cut:'main_app/static/' %}{% else %}{% static 'images/profile/guest.png' %}{% endif %}">
+  <a href="/profile/{{profile.id}}" class="card-a">
+    <div class="card-content ">
+      <div class="flex-container">
+        <div>
+          <span class="card-title"> {{ profile.user }}</span>
+        </div>
+      </div>l
+    </div>
+
+  </a>
+
+  </div>
+  {% endfor %}
+   {% endblock %}

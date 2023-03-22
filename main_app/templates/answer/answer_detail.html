@@ -26,11 +26,12 @@
         <p>Date: {{ answer.date }}</p>
         {% load static %}
         <div class="profile-container profile-header comment">
+          <a class="dropdown-trigger" href="{% url 'profile_detail' answer.user.id %}">
           <img src="{% if answer.user.profile.avatar %}
           {% static answer.user.profile.avatar|cut:'main_app/static/' %}
           {% else %}{% static 'images/profile/guest.png' %}{% endif %}"
            style="vertical-align: middle;">
-          <span>{{ answer.user.username }}</span>
+          <span>{{ answer.user.username }}</span></a>
         </div>
       </div>
     </div>
@@ -102,11 +103,12 @@
           <p>Date: {{ reply.date }}</p>
           {% load static %}
           <div class="profile-container profile-header comment">
+            <a class="dropdown-trigger" href="{% url 'profile_detail' answer.user.id %}">
             <img src="{% if reply.user.profile.avatar %}
             {% static reply.user.profile.avatar|cut:'main_app/static/' %}
             {% else %}{% static 'images/profile/guest.png' %}{% endif %}" 
             style="vertical-align: middle;">
-            <span>{{ reply.user.username }}</span>
+            <span>{{ reply.user.username }}</span></a>
           </div>
         </div>
       </div>
