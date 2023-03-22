@@ -14,76 +14,76 @@
 
 ## Instructions to use App
 
-## 1: Sign Up
+## 1- Sign Up
 Fill in the Sign Up form
 
 ![This is an image](ReadME-imgs/img1.png)
 
-## 2: Sign In
+## 2- Sign In
 Enter your Email Address and Password
 
 ![This is an image](ReadME-imgs/img2.png)
 <!-- insert screenshot -->
 
-## 3: Pick Your Category: 
+## 3- Pick Your Category: 
 Choose either Frontend, Backend, or Command Line
 
 ![This is an image](ReadME-imgs/img3.png)
 <!-- insert screenshot -->
 
-## 4: Ask a question
+## 4- Ask a question
 Either ask, answer, or scroll through a question of your choosing, or go to the Questions page and search for a specific question
 
 ![This is an image](ReadME-imgs/img4.png)
 <!-- insert screenshot -->
 
-## 5: Answer a question
+## 5- Answer a question
 ![This is an image](ReadME-imgs/img6.png)
 
-## 6: Reply to an Answer
+## 6- Reply to an Answer
 ![This is an image](ReadME-imgs/img5.png)
 
-## 7: Search for a question
+## 7- Search for a question
 ![This is an image](ReadME-imgs/img4.png)
 
-## 8: Likes and top answer
+## 8- Likes and top answer
 Add a 'like' to your favorite answer to contribute to the community and have the best answers pinned on top.
 
 ![This is an image](ReadME-imgs/img7.png)
 <!-- insert screenshot -->
 
-## 9: you can dislike the answer
+## 9- you can dislike the answer
 
 ![This is an image](ReadME-imgs/img9.png)
 
-## 10: You can view your profile at anytime through the Navbar, edit it, log out, change your password
+## 10- You can view your profile at anytime through the Navbar, edit it, log out, change your password
 
 ![This is an image](ReadME-imgs/newprofile.png)
 <!-- insert screenshot -->
 
 
-## 11: you can get a badge when your answer or reply get likes
+## 11- you can get a badge when your answer or reply get likes
 
 ![This is an image](ReadME-imgs/badge.png)
 
-## 12: you can find your own Questions
+## 12- you can find your own Questions
 
 ![This is an image](ReadME-imgs/newprofile.png)
 
-## : Project Development
+## Project Development
 
 We first came together as a team brainstormed ideas and sketched some basic wireframes on paper. Later on we put some wireframes together through FIGMA, which included the ERD and the frontend. We used Trello to coordinate and assign tasks and track our progress.
 
-## : Code Examples
+## Code Examples
 
 <!-- ![This is an image](insert image path) -->
 <!-- insert screenshot -->
 
-## : Challenges
+## Challenges
 
 Merging conflicts / GitHUB
 
-## : Wins
+## Wins
 
 Add a tool for the user to enable him to like and dislike the answer
 Allocate a page to Frequently Asked Questions as a refrence for the user
@@ -171,15 +171,15 @@ to allow user uploading profile pictures
 
 * python-decouple==3.8
 
-## : Application Architecture
+## Application Architecture
 ERD:
 ![This is an image](ReadME-imgs/imgERD.png)
 
-Wireframes:
+## Wireframes:
 ![This is an image](ReadME-imgs/imgWF1.png)
 ![This is an image](ReadME-imgs/imgWF2.png)
 ![This is an image](ReadME-imgs/imgWF3.png)
 ![This is an image](ReadME-imgs/imgWF4.png)
 
-Users story:
+## Users story:
 Our users range from beginners/students, all the way up to the most seasoned senior developers. Every developed faces bugs, and 2 brains are always better than 1. CodeHub provides that platform for devs to co-operate and offer solutions to each other's problems.
