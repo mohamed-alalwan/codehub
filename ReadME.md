@@ -6,7 +6,7 @@
 * Git + Github
 * Materialize CSS Framework
 
-   Packages used:
+## Packages used:
 * Python Decouple
 * Pillow
 * Django Ckeditor
@@ -43,47 +43,36 @@ Either ask, answer, or scroll through a question of your choosing, or go to the 
 ## 6: Reply to an Answer
 ![This is an image](ReadME-imgs/img5.png)
 
-## 4: Search for a question
+## 7: Search for a question
 ![This is an image](ReadME-imgs/img4.png)
 
-## 5: Likes and top answer
+## 8: Likes and top answer
 Add a 'like' to your favorite answer to contribute to the community and have the best answers pinned on top.
 
 ![This is an image](ReadME-imgs/img7.png)
 <!-- insert screenshot -->
 
-## 6: you can dislike the answer
+## 9: you can dislike the answer
 
 ![This is an image](ReadME-imgs/img9.png)
 
-## 7: You can view your profile at anytime through the Navbar, edit it, log out, change your password
+## 10: You can view your profile at anytime through the Navbar, edit it, log out, change your password
 
 ![This is an image](ReadME-imgs/newprofile.png)
 <!-- insert screenshot -->
 
 
-## 10: you can get a badge when your answer or reply get likes
+## 11: you can get a badge when your answer or reply get likes
 
 ![This is an image](ReadME-imgs/badge.png)
 
-## 11: you can find your own Questions
+## 12: you can find your own Questions
 
 ![This is an image](ReadME-imgs/newprofile.png)
 
 ## : Project Development
 
 We first came together as a team brainstormed ideas and sketched some basic wireframes on paper. Later on we put some wireframes together through FIGMA, which included the ERD and the frontend. We used Trello to coordinate and assign tasks and track our progress.
-<!-- Add things here ^^  -->
-ERD:
-![This is an image]()
-![This is an image]()
-![This is an image]()
-![This is an image]()
-![This is an image]()
-![This is an image]()
-![This is an image]()
-
-<!-- insert screenshot -->
 
 ## : Code Examples
 
@@ -94,9 +83,6 @@ ERD:
 
 Merging conflicts / GitHUB
 
-
-
-
 ## : Wins
 
 Add a tool for the user to enable him to like and dislike the answer
@@ -106,7 +92,6 @@ Allocate a page to Frequently Asked Questions as a refrence for the user
 >>>>>
 * 1- in used models  
  we built the structure of each factor such as category and question, answer, badge, profile through classes and some functions and provided clear and accurate insight and instructions to the server to perform also imported to support them 
-
 
 * 2- in views.py
  we imported vital classes and models such : createview, UpdateView, DeleteView and Question, Category, Answer, Reply, Profile, Badges to support us build new classes and functions in order to inherit from them
@@ -150,14 +135,11 @@ this folder containes all the migrations we did in order to operate the function
 * 7- the static 
 this folder containes the styling pattern of the website and pictures , Javascript functions
 
-
 * 8- .env
 this file is to encrypt the values such as:
 SecretKey
 Debug
 Engine
-
-
 
 * 9- settings 
 Settings file is already built in but we added and modified few things such as:
@@ -174,7 +156,6 @@ connect the accounts of users to the website
 
 ## Installation instructions for any dependencies
 
-
 * django-ckeditor==6.5.1
 * django-ckeditor-5==0.2.4
 
@@ -183,7 +164,6 @@ we installed the above in order to upload the symbols set
 * django-cleanup==7.0.0
 
 to allow the user deleting profile image
-
 
 * Pillow==9.4.0
 
