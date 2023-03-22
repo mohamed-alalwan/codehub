@@ -5,6 +5,8 @@
 * JavaScript CSS, HTML5, 
 * Git + Github
 * Materialize CSS Framework
+
+   Packages used:
 * Python Decouple
 * Pillow
 * Django Ckeditor
@@ -36,10 +38,10 @@ Either ask, answer, or scroll through a question of your choosing, or go to the 
 <!-- insert screenshot -->
 
 ## 5: Answer a question
-![This is an image](ReadME-imgs/img5.png)
+![This is an image](ReadME-imgs/img6.png)
 
 ## 6: Reply to an Answer
-![This is an image](ReadME-imgs/img6.png)
+![This is an image](ReadME-imgs/img5.png)
 
 ## 4: Search for a question
 ![This is an image](ReadME-imgs/img4.png)
@@ -50,19 +52,23 @@ Add a 'like' to your favorite answer to contribute to the community and have the
 ![This is an image](ReadME-imgs/img7.png)
 <!-- insert screenshot -->
 
+## 6: you can dislike the answer
 
-## 6: You can view your profile at anytime through the Navbar, and edit it.
+![This is an image](ReadME-imgs/img9.png)
 
-![This is an image](ReadME-imgs/img8.png)
+## 7: You can view your profile at anytime through the Navbar, edit it, log out, change your password
+
+![This is an image](ReadME-imgs/newprofile.png)
 <!-- insert screenshot -->
 
-## 7: You can log out 
 
-![This is an image](ReadME-imgs/img8.png)
+## 10: you can get a badge when your answer or reply get likes
 
-## 8: you can change your password
+![This is an image](ReadME-imgs/badge.png)
 
-![This is an image](ReadME-imgs/img8.png)
+## 11: you can find your own Questions
+
+![This is an image](ReadME-imgs/newprofile.png)
 
 ## : Project Development
 
@@ -88,29 +94,28 @@ ERD:
 
 Merging conflicts / GitHUB
 
+
+
+
 ## : Wins
 
 Add a tool for the user to enable him to like and dislike the answer
 Allocate a page to Frequently Asked Questions as a refrence for the user
 
 ## A couple paragraphs about the general approach you took
-
-## in used models
+>>>>>
+* 1- in used models  
  we built the structure of each factor such as category and question, answer, badge, profile through classes and some functions and provided clear and accurate insight and instructions to the server to perform also imported to support them 
 
-3- we installed packages such as: django-ckeditor-5==0.2.4
-python-decouple
 
-
-
-## in views.py
+* 2- in views.py
  we imported vital classes and models such : createview, UpdateView, DeleteView and Question, Category, Answer, Reply, Profile, Badges to support us build new classes and functions in order to inherit from them
 
 A-we imported stuff to enable and ease login process for the user 
 B- we imported crucial things to enable the user to browse from page to another
 D-we imported important forms like: SignUpForm, UpdateProfileForm, UpdateUserForm and created functions to enable the user to sign up and update his profile 
 
-## in urls
+* 3- in urls
  we connected the functions and models to pages to be shown to the user
 A- we built catogery urls and connectted them to the pages
 B- we built Questions urls and connectted them to the pages
@@ -120,7 +125,7 @@ E- we built auth urls and connectted them to the pages
 F- we built profile urls and connectted them to the pages
 G- we built badges urls and connectted them to the pages
 
-## in forms
+* 4- in forms
 
  we imported user and profile in order to build the structer of the below forms to enable the user to sign up and update his profile 
 
@@ -128,7 +133,7 @@ A-SignUpForm
 B-UpdateUserForm
 C-UpdateProfileForm
 
-##  in templates
+* 5- in templates
 Templates are responsible for showing the pages for the user
 A- answer: is resposible for shoing the answers of question using Django Template
 B- badges: is resposible for showing the badges 
@@ -139,13 +144,51 @@ F- Question: is resposible for showing the question
 G- Registration: has the files that activate the browsing process including login and Sign up ,change password 
 H- Reply: is resposible for showing the reply 
 
-## the migrations folder
+* 6- the migrations folder
 this folder containes all the migrations we did in order to operate the functions and connect them to the server
 
-## the static 
+* 7- the static 
 this folder containes the styling pattern of the website and pictures , Javascript functions
 
 
-## .env
-this file is to host and connect VS code to Django 
+* 8- .env
+this file is to encrypt the values such as:
+SecretKey
+Debug
+Engine
 
+
+
+* 9- settings 
+Settings file is already built in but we added and modified few things such as:
+Databases
+Login
+CKeditor >>>> to install symbols and code version to the answer part
+
+* 10- git ignore
+we used it to avoid deploying some files to the website.
+
+* 11- urls
+connect the app to Git Hub
+connect the accounts of users to the website 
+
+## Installation instructions for any dependencies
+
+
+* django-ckeditor==6.5.1
+* django-ckeditor-5==0.2.4
+
+we installed the above in order to upload the symbols set 
+
+* django-cleanup==7.0.0
+
+to allow the user deleting profile image
+
+
+* Pillow==9.4.0
+
+to allow user uploading profile pictures
+
+* python-decouple==3.8
+
+support .env file
