@@ -35,10 +35,7 @@ def about(request):
 def question_index(request):
     #Search for questions
     search = request.GET.get('search')
-    category = request.GET.get('category')
-    sort = request.GET.get('sort')
-    
-    if(search is None):
+    if(search is None ):
         questions = Question.objects.all()
     else:
         questions = Question.objects.filter(title__icontains = search)
