@@ -24,13 +24,16 @@
           <p>Body: {{ question.body|safe}}</p>
           <p>Date: {{ question.date }}</p>
           {% load static %}
+          
           <div class="profile-container profile-header comment">
+            <a class="dropdown-trigger" href="{% url 'profile_index' %}">
             <img src="{% if question.user.profile.avatar %}
             {% static question.user.profile.avatar|cut:'main_app/static/' %}
             {% else %}{% static 'images/profile/guest.png' %}{% endif %}" 
             style="vertical-align: middle;">
-            <span>{{ question.user.username }}</span>
+            <span>{{ question.user.username }}</span></a>
           </div>
+          
         </div>
       </div>
     </div>
@@ -69,11 +72,12 @@
           <p>Date: {{ answer.date }}</p>
           {% load static %}
           <div class="profile-container profile-header comment">
+            <a class="dropdown-trigger" href="{% url 'profile_index' %}">
             <img src="{% if answer.user.profile.avatar %}
             {% static answer.user.profile.avatar|cut:'main_app/static/' %}
             {% else %}{% static 'images/profile/guest.png' %}{% endif %}" 
             style="vertical-align: middle;">
-            <span>{{ answer.user.username }}</span>
+            <span>{{ answer.user.username }}</span></a>
           </div>
           
         </div>

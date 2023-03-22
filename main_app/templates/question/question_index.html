@@ -13,13 +13,14 @@
 </nav>
 
 <h1>Question List</h1>
-<form style="text-align: center;">
+<form style="text-align: center;" method="get" action="">
+  {% csrf_token %}
   <div class="input-field" style="display: inline-block; width: 50%;">
     <i class="material-icons prefix">search</i>
-      <input id="search" type="text" placeholder="Search..." required>
+      <input id="search" name="search" type="text" placeholder="Search..." required>
   </div>
   <div class="input-field" style="display: inline-block;">
-    <select>
+    <select name="category">
       <option value="" disabled selected>Category</option>
       {% for category in categories %}
       <option value="{{category.id}}">{{ category.name }}</option>
@@ -27,13 +28,17 @@
     </select>
   </div>
   <div class="input-field" style="display: inline-block;">
-    <select>
+    <select name="sort">
       <option value="" disabled selected>Sort</option>
       <option value="1">Most Recent</option>
       <option value="2">Most Answered</option>
     </select>
   </div>
+  <button class="btn" type="submit">Search</button>
 </form>
+
+
+
 <div><a class="btn blue" href="{% url 'create_question' %}">Add Question</a></div>
 <table class="striped">
   <thead>
@@ -48,7 +53,7 @@
     {% for question in  questions %}
     <tr>
       <td style="width: 50%;"><a href="{% url 'question_detail' question.id %}">{{ question.title }}</a></td>
-      <td>{{ question.user }}</td>
+      <td><a href={% url 'profile_detail' question.user.id %}>{{ question.user }}</a></td>
       <td>{{ question.date }}</td>
     </tr>
     {% endfor %}
