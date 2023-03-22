@@ -35,4 +35,10 @@
 {% else %}
     <p>No badges for {{ user.first_name }} yet...</p>
 {% endif %}
+
+{% for message in messages %}
+<script>
+  M.toast({html: '{{ message }}'})
+</script>
+{% endfor %}
 {% endblock %}
