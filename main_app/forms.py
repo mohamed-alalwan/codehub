@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import Profile, Answer, Reply
 from ckeditor.widgets import CKEditorWidget
+from django import forms 
 
 
 class SignUpForm(UserCreationForm):
@@ -42,3 +43,5 @@ class CreateReplyForm(forms.ModelForm):
     class Meta:
         model = Reply
         fields = ['title', 'body']
+        
+class SearchForm(forms.Form): query = forms.CharField()
