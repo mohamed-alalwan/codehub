@@ -191,4 +191,15 @@ to allow user uploading profile pictures
 
 * python-decouple==3.8
 
-support .env file
+## : Application Architecture
+ERD:
+![This is an image](ReadME-imgs/imgERD.png)
+
+Wireframes:
+![This is an image](ReadME-imgs/imgWF1.png)
+![This is an image](ReadME-imgs/imgWF2.png)
+![This is an image](ReadME-imgs/imgWF3.png)
+![This is an image](ReadME-imgs/imgWF4.png)
+
+Users story:
+Our users range from beginners/students, all the way up to the most seasoned senior developers. Every developed faces bugs, and 2 brains are always better than 1. CodeHub provides that platform for devs to co-operate and offer solutions to each other's problems.
