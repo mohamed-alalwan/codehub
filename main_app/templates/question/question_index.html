@@ -13,32 +13,16 @@
 </nav>
 
 <h1>Question List</h1>
-<form style="text-align: center;" method="get" action="">
+<form style="text-align: left;" method="get" action="">
   {% csrf_token %}
-  <div class="input-field" style="display: inline-block; width: 50%;">
+  <div class="input-field">
     <i class="material-icons prefix">search</i>
       <input id="search" name="search" type="text" placeholder="Search..." required>
   </div>
-  <div class="input-field" style="display: inline-block;">
-    <select name="category">
-      <option value="" disabled selected>Category</option>
-      {% for category in categories %}
-      <option value="{{category.id}}">{{ category.name }}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <div class="input-field" style="display: inline-block;">
-    <select name="sort">
-      <option value="" disabled selected>Sort</option>
-      <option value="1">Most Recent</option>
-      <option value="2">Most Answered</option>
-    </select>
-  </div>
-  <button class="btn" type="submit">Search</button>
 </form>
 
 
-
+{% if questions.count %}
 <div><a class="btn blue" href="{% url 'create_question' %}">Add Question</a></div>
 <table class="striped">
   <thead>
@@ -59,9 +43,7 @@
     {% endfor %}
   </tbody>
 </table>
-<script>
-  $(document).ready(function(){
-    $('select').formSelect();
-  });
-</script>
+{% else %}
+<p style="text-align: center;">No Questions Found</p>
+{% endif %}
 {% endblock %}

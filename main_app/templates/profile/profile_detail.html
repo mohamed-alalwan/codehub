@@ -18,13 +18,13 @@
 <hr>
 
 <h4>Badges</h4>
-{% if user.profile.badges.count %}
-  {% for badges in user.profile.badges.all %}
+{% if selected_user.profile.badges.count %}
+  {% for badges in selected_user.profile.badges.all %}
   <img width="150" height="150" src="{% static badges.avatar|cut:'main_app/static/' %}">
      
   {% endfor %}
 {% else %}
-    <p>No badges for {{ user.first_name }} yet...</p>
+    <p>No badges for {{ selected_user.first_name }} yet...</p>
 {% endif %}
 
 {% endblock %}
