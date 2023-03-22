@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .forms import SignUpForm, UpdateProfileForm, UpdateUserForm, CreateAnswerForm, CreateReplyForm
 from django.contrib.messages.views import SuccessMessageMixin
-
+from django.urls import reverse
 
 
 # =======================Category Section========================
@@ -99,7 +99,8 @@ class AnswerUpdate(LoginRequiredMixin,UpdateView):
 
 class AnswerDelete(LoginRequiredMixin,DeleteView):
     model = Answer
-    success_url = '/answer/'
+    def get_success_url(self):
+        return reverse('question_detail', args=([str(self.object.question.id)]))
 
 # =======================Reply Section========================
 
@@ -129,7 +130,8 @@ class ReplyUpdate(LoginRequiredMixin,UpdateView):
 
 class ReplyDelete(LoginRequiredMixin,DeleteView):
     model = Reply
-    success_url = '/reply/'
+    def get_success_url(self):
+        return reverse('answer_detail', args=([str(self.object.answer.id)]))
 
 
 # =======================Auth Section========================
