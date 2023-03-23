@@ -5,7 +5,7 @@
 <ul class="collapsible">
 {% for category in categories %}
     <li class="{% if category.id is categories.first.id %}active{% endif %}">
-      <div class="collapsible-header">
+      <div class="collapsible-header grey darken-4 white-text">
           <i class="material-icons">{{ category.icon_code }}</i>
           <!--Category Name-->
           <span>{{ category.name }}</span>
