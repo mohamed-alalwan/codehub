@@ -41,7 +41,7 @@ def question_index(request):
         questions = Question.objects.filter(title__icontains = search)
     categories = Category.objects.all().order_by('id')
     return render(request,'question/question_index.html', 
-    {'questions': questions, 'categories': categories})
+    {'questions': questions.order_by('-id'), 'categories': categories})
 
 def question_detail(request, question_id):
     question= Question.objects.get(id=question_id)
@@ -61,12 +61,21 @@ class QuestionUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Question
     fields = ['title', 'body', 'category']
     success_message = 'Question updated successfully!'
+    def form_valid(self, form) :
+        if form.instance.user != self.request.user:
+            messages.error(self.request,'Error: not authorized!')
+            return redirect('home')
+        return super().form_valid(form)
 
 class QuestionDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Question
     success_url = '/question/'
     success_message = 'Question removed successfully!'
-
+    def form_valid(self, form) :
+        if self.object.user != self.request.user:
+            messages.error(self.request,'Error: not authorized!')
+            return redirect('home')
+        return super().form_valid(form)
 
 # =======================Answer Section========================
 def answer_detail(request, answer_id):
@@ -90,6 +99,11 @@ class AnswerUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Answer
     fields = ['title', 'body']
     success_message = 'Answer updated successfully!'
+    def form_valid(self, form) :
+        if form.instance.user != self.request.user:
+            messages.error(self.request,'Error: not authorized!')
+            return redirect('home')
+        return super().form_valid(form)
 
 
 class AnswerDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
@@ -97,6 +111,11 @@ class AnswerDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = 'Answer deleted successfully!'
     def get_success_url(self):
         return reverse('question_detail', args=([str(self.object.question.id)]))
+    def form_valid(self, form) :
+        if self.object.user != self.request.user:
+            messages.error(self.request,'Error: not authorized!')
+            return redirect('home')
+        return super().form_valid(form)
 
 # =======================Reply Section========================
 
@@ -122,8 +141,13 @@ def reply_create(request, answer_id):
 
 class ReplyUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Reply
-    fields = '__all__'
+    fields = ['title', 'body']
     success_message = 'Reply updated successfully!'
+    def form_valid(self, form) :
+        if form.instance.user != self.request.user:
+            messages.error(self.request,'Error: not authorized!')
+            return redirect('home')
+        return super().form_valid(form)
     
 
 class ReplyDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
@@ -131,6 +155,11 @@ class ReplyDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = 'Reply deleted successfully!'
     def get_success_url(self):
         return reverse('answer_detail', args=([str(self.object.answer.id)]))
+    def form_valid(self, form) :
+        if self.object.user != self.request.user:
+            messages.error(self.request,'Error: not authorized!')
+            return redirect('home')
+        return super().form_valid(form)
 
 
 # =======================Auth Section========================
@@ -213,7 +242,7 @@ def profile_update(request):
 @login_required
 def profile_question(request):
     questions = Question.objects.filter(user = request.user)
-    return render(request,'question/questionp_index.html', {'questions': questions})
+    return render(request,'question/questionp_index.html', {'questions': questions.order_by('-id')})
 
 @login_required
 def profile_answer(request):
@@ -249,9 +278,11 @@ def like_answer(request, pk):
     if(answer.likes.contains(request.user)):
         answer.likes.remove(request.user)
         check_badge(answer.user, -1)
+        messages.success(request, 'Answer like removed successfully!')
     else:
         answer.likes.add(request.user)
         check_badge(answer.user, 1)
+        messages.success(request, 'Answer like added successfully!')
     #remove dislike from answer if it exists
     if(answer.dislikes.contains(request.user)):
         answer.dislikes.remove(request.user)
@@ -266,9 +297,11 @@ def dislike_answer(request, pk):
     if(answer.dislikes.contains(request.user)):
         answer.dislikes.remove(request.user)
         check_badge(answer.user, 1)
+        messages.success(request, 'Answer dislike removed successfully!')
     else:
         answer.dislikes.add(request.user)
         check_badge(answer.user, -1)
+        messages.success(request, 'Answer dislike added successfully!')
     #remove dislike from answer if it exists
     if(answer.likes.contains(request.user)):
         answer.likes.remove(request.user)

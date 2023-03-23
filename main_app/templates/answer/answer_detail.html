@@ -38,8 +38,16 @@
   <div class="card-action">
     {% if user.is_authenticated %}
     {% if user.id is answer.user.id %}
-    <a class="btn blue" href="{% url 'answer_update' answer.id %}">Edit</a>
-    <a class="btn blue" href="{% url 'answer_delete' answer.id %}">Delete</a>
+
+    <a class="btn orange" href="{% url 'answer_update' answer.id %}">
+      <i class="material-icons left">edit</i>
+      Edit
+    </a>
+
+    <a class="btn red" href="{% url 'answer_delete' answer.id %}">
+      <i class="material-icons left">delete</i>
+      Delete
+    </a>
     {% endif %}
     {% endif %}
 
@@ -137,8 +145,15 @@
   <div class="card-action">
     {% if user.is_authenticated %}
     {% if user.id is reply.user.id %}
-    <a class="btn blue" href="{% url 'reply_update' reply.id %}">Edit</a>
-    <a class="btn blue" href="{% url 'reply_delete' reply.id %}">Delete</a>
+    <a class="btn orange" href="{% url 'reply_update' reply.id %}">
+      <i class="material-icons left">edit</i>
+      Edit
+    </a>
+  
+    <a class="btn red" href="{% url 'reply_delete' reply.id %}">
+      <i class="material-icons left">delete</i>
+      Delete
+    </a>
     {% endif %}
     {% endif %}
   </div>

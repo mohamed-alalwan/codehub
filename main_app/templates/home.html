@@ -27,7 +27,7 @@
           </thead>
 
           <tbody>
-            {% for question in  questions %}
+            {% for question in questions.all|dictsortreversed:'id' %}
             {% if question.category.id is category.id %}
             <tr>
               <td style="width: 50%;"><a href="{% url 'question_detail' question.id %}">{{ question.title }}</a></td>
