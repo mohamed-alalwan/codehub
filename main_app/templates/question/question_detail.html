@@ -36,12 +36,12 @@
 {% if user.is_authenticated %}
 {% if user.id is question.user.id %}
 <div class="card-action">
-  <a class="btn orange" href="{% url 'update_question' question.id %}">
+  <a class="btn orange-text white" href="{% url 'update_question' question.id %}">
     <i class="material-icons left">edit</i>
     Edit
   </a>
 
-  <a class="btn red" href="{% url 'question_delete' question.id %}">
+  <a class="btn red-text white" href="{% url 'question_delete' question.id %}">
     <i class="material-icons left">delete</i>
     Delete
   </a>
@@ -104,12 +104,12 @@
     <!--Answer Card Section-->
     {% if user.is_authenticated %}
     {% if user.id is answer.user.id %}
-    <a class="btn orange" href="{% url 'answer_update' answer.id %}">
+    <a class="btn orange-text white" href="{% url 'answer_update' answer.id %}">
       <i class="material-icons left">edit</i>
       Edit
     </a>
 
-    <a class="btn red" href="{% url 'answer_delete' answer.id %}">
+    <a class="btn red-text white" href="{% url 'answer_delete' answer.id %}">
       <i class="material-icons left">delete</i>
       Delete
     </a>
