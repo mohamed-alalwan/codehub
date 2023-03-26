@@ -75,9 +75,69 @@ Add a 'like' to your favorite answer to contribute to the community and have the
 We first came together as a team brainstormed ideas and sketched some basic wireframes on paper. Later on we put some wireframes together through FIGMA, which included the ERD and the frontend. We used Trello to coordinate and assign tasks and track our progress.
 
 ## Code Examples
+The most challenging feature to develop was the like and dislike on the answers and assigning badges based to the users based on the total points they get from them.
 
-<!-- ![This is an image](insert image path) -->
-<!-- insert screenshot -->
+* Checking the Badges
+In the views.py file, we have created a 'check badges' function that runs every time a user likes or dislikes an answer.
+```
+def check_badge(user, point_difference):
+    #modify user profile points
+    profile = Profile.objects.get(user=user)
+    profile.points += point_difference
+    #add badge to user profile
+    badges = Badge.objects.filter(point_limit=profile.points)
+    for badge in badges:
+        if(not profile.badges.contains(badge)):
+            profile.badges.add(badge)
+    profile.save()
+```
+
+* Liking the answer
+The 'like answer' method adds an association between like and the answer, therefore adds points to the user. It also does the opposite if the answer is already liked. Theres also a check that removes a dislike if there is any on the same answer, so the answer cannbot be liked and disliked by the same user at once.
+```
+@login_required
+def like_answer(request, pk):
+    answer = Answer.objects.get(pk=pk)
+    #toggle like
+    if(answer.likes.contains(request.user)):
+        answer.likes.remove(request.user)
+        check_badge(answer.user, -1)
+        messages.success(request, 'Answer like removed successfully!')
+    else:
+        answer.likes.add(request.user)
+        check_badge(answer.user, 1)
+        messages.success(request, 'Answer like added successfully!')
+    #remove dislike from answer if it exists
+    if(answer.dislikes.contains(request.user)):
+        answer.dislikes.remove(request.user)
+    #save changes to answer
+    answer.save()
+    return redirect(f'/question/{answer.question.id}')
+```
+
+* Disliking the answer
+The 'dislike answer' method adds an association between dislike and the answer, therefore removes points to the user. It also does the opposite if the answer is already disliked. Theres also a check that removes a like if there is any on the same answer, so the answer cannbot be liked and disliked by the same user at once.
+```
+@login_required
+def dislike_answer(request, pk):
+    answer = Answer.objects.get(pk=pk)
+    #toggle dislike
+    if(answer.dislikes.contains(request.user)):
+        answer.dislikes.remove(request.user)
+        check_badge(answer.user, 1)
+        messages.success(request, 'Answer dislike removed successfully!')
+    else:
+        answer.dislikes.add(request.user)
+        check_badge(answer.user, -1)
+        messages.success(request, 'Answer dislike added successfully!')
+    #remove dislike from answer if it exists
+    if(answer.likes.contains(request.user)):
+        answer.likes.remove(request.user)
+    #save changes to answer
+    answer.save()
+    return redirect(f'/question/{answer.question.id}')
+```
+
 
 ## Challenges
 
