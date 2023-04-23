@@ -57,18 +57,18 @@ Add a 'like' to your favorite answer to contribute to the community and have the
 
 ![This is an image](ReadME-imgs/img9.png)
 
-## 10- You can view your profile at anytime through the Navbar, edit it, log out, change your password
+## 10- You can view your profile at anytime through the Profile, edit it, log out, change your password
 
 ![This is an image](ReadME-imgs/newprofile.png)
 
+## 11- You can also find your own Questions and Answers
 
-## 11- You can get a badge when your answer or reply get likes
+![This is an image](ReadME-imgs/profile-zoom.png)
+
+
+## 12- You can get a badge when your answer or reply get likes
 
 ![This is an image](ReadME-imgs/badge.png)
-
-## 12- You can find your own Questions and Answers
-
-![This is an image](ReadME-imgs/newprofile.png)
 
 ## Project Development
 
