@@ -8,7 +8,7 @@ CodeHub is a questions and answers forum website, for coders to share their expe
 * SQL
 * Django
 * JavaScript CSS, HTML5, 
-* Git + Github
+* GitHub
 * Materialize CSS Framework
 
 ## Packages used:
@@ -28,19 +28,16 @@ Fill in the Sign Up form
 Enter your Email Address and Password
 
 ![This is an image](ReadME-imgs/img2.png)
-<!-- insert screenshot -->
 
 ## 3- Pick Your Category: 
 Choose either Frontend, Backend, or Command Line
 
 ![This is an image](ReadME-imgs/img3.png)
-<!-- insert screenshot -->
 
 ## 4- Ask a question
 Either ask, answer, or scroll through a question of your choosing, or go to the Questions page and search for a specific question
 
 ![This is an image](ReadME-imgs/img4.png)
-<!-- insert screenshot -->
 
 ## 5- Answer a question
 ![This is an image](ReadME-imgs/img6.png)
@@ -49,29 +46,27 @@ Either ask, answer, or scroll through a question of your choosing, or go to the 
 ![This is an image](ReadME-imgs/img5.png)
 
 ## 7- Search for a question
-![This is an image](ReadME-imgs/img4.png)
+![This is an image](ReadME-imgs/img11.png)
 
 ## 8- Likes and top answer
 Add a 'like' to your favorite answer to contribute to the community and have the best answers pinned on top.
 
 ![This is an image](ReadME-imgs/img7.png)
-<!-- insert screenshot -->
 
-## 9- you can dislike the answer
+## 9- You can dislike the answer
 
 ![This is an image](ReadME-imgs/img9.png)
 
 ## 10- You can view your profile at anytime through the Navbar, edit it, log out, change your password
 
 ![This is an image](ReadME-imgs/newprofile.png)
-<!-- insert screenshot -->
 
 
-## 11- you can get a badge when your answer or reply get likes
+## 11- You can get a badge when your answer or reply get likes
 
 ![This is an image](ReadME-imgs/badge.png)
 
-## 12- you can find your own Questions
+## 12- You can find your own Questions and Answers
 
 ![This is an image](ReadME-imgs/newprofile.png)
 
