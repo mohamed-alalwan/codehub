@@ -146,6 +146,8 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+CSRF_COOKIE_SAMESITE = None
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
