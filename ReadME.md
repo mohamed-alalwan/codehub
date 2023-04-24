@@ -1,7 +1,7 @@
 # CodeHub Application
 CodeHub is a questions and answers forum website, for coders to share their experiences and feedback. 
 
-<a href="https://codehub-app.onrender.com/">Deployed Link</a>
+<a href="https://codehub-app.onrender.com/" target="_blank">Deployed Link</a>
 
 ## Technologies Used
 * Python
